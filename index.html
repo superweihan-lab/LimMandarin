@@ -1,198 +1,451 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lim Mandarin Academy | 专业线上华文与学术课程</title>
+  <title>华文补习课程 | LMA - 2027 全线上新学年课程</title>
   <!-- 引入现代 Tailwind CSS 快速排版 -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入图标库 -->
+  <!-- 引入 FontAwesome 图标库 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     html { scroll-behavior: smooth; }
+    /* 编辑模式开启时的视觉提示 */
+    body.is-editing [contenteditable="true"] {
+      outline: 2px dashed #f59e0b !important;
+      outline-offset: 3px;
+      cursor: text;
+    }
+    body.is-editing [contenteditable="true"]:hover {
+      background-color: rgba(254, 243, 199, 0.5);
+    }
   </style>
-</head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.-top-3{top:-0.75rem}.bottom-6{bottom:1.5rem}.left-1\/2{left:50%}.left-6{left:1.5rem}.right-6{right:1.5rem}.top-0{top:0px}.z-30{z-index:30}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.my-4{margin-top:1rem;margin-bottom:1rem}.mb-10{margin-bottom:2.5rem}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-8{margin-bottom:2rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-2{height:0.5rem}.h-48{height:12rem}.h-8{height:2rem}.h-full{height:100%}.w-2{width:0.5rem}.w-48{width:12rem}.w-8{width:2rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.flex-shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-3\.5{gap:0.875rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-slate-100 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(241 245 249 / var(--tw-divide-opacity, 1))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-t{border-top-width:1px}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-amber-500{--tw-border-opacity:1;border-color:rgb(245 158 11 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.bg-amber-100{--tw-bg-opacity:1;background-color:rgb(254 243 199 / var(--tw-bg-opacity, 1))}.bg-amber-100\/80{background-color:rgb(254 243 199 / 0.8)}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-purple-50{--tw-bg-opacity:1;background-color:rgb(250 245 255 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-200\/50{background-color:rgb(226 232 240 / 0.5)}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/95{background-color:rgb(255 255 255 / 0.95)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.from-amber-50\/70{--tw-gradient-from:rgb(255 251 235 / 0.7) var(--tw-gradient-from-position);--tw-gradient-to:rgb(255 251 235 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-slate-50\/50{--tw-gradient-to:rgb(248 250 252 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(248 250 252 / 0.5) var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-slate-50{--tw-gradient-to:#f8fafc var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-3\.5{padding:0.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.pl-6{padding-left:1.5rem}.pr-1{padding-right:0.25rem}.pt-2{padding-top:0.5rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[10px\]{font-size:10px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11 / var(--tw-text-opacity, 1))}.text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9 / var(--tw-text-opacity, 1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-amber-900{--tw-text-opacity:1;color:rgb(120 53 15 / var(--tw-text-opacity, 1))}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129 / var(--tw-text-opacity, 1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-purple-600{--tw-text-opacity:1;color:rgb(147 51 234 / var(--tw-text-opacity, 1))}.text-purple-700{--tw-text-opacity:1;color:rgb(126 34 206 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-40{opacity:0.4}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.selection\:bg-amber-200 *::selection{--tw-bg-opacity:1;background-color:rgb(253 230 138 / var(--tw-bg-opacity, 1))}.selection\:bg-amber-200::selection{--tw-bg-opacity:1;background-color:rgb(253 230 138 / var(--tw-bg-opacity, 1))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-amber-300:hover{--tw-border-opacity:1;border-color:rgb(252 211 77 / var(--tw-border-opacity, 1))}.hover\:border-amber-400:hover{--tw-border-opacity:1;border-color:rgb(251 191 36 / var(--tw-border-opacity, 1))}.hover\:border-slate-400:hover{--tw-border-opacity:1;border-color:rgb(148 163 184 / var(--tw-border-opacity, 1))}.hover\:bg-amber-50\/40:hover{background-color:rgb(255 251 235 / 0.4)}.hover\:bg-amber-600:hover{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(71 85 105 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-800:hover{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.hover\:text-amber-600:hover{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.hover\:opacity-100:hover{opacity:1}.hover\:shadow-lg:hover{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-xl:hover{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}@media (min-width: 640px){.sm\:mt-0{margin-top:0px}.sm\:inline{display:inline}.sm\:h-56{height:14rem}.sm\:w-56{width:14rem}.sm\:w-auto{width:auto}.sm\:flex-row{flex-direction:row}.sm\:p-12{padding:3rem}.sm\:p-4{padding:1rem}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-5xl{font-size:3rem;line-height:1}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}@media (min-width: 768px){.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:py-24{padding-top:6rem;padding-bottom:6rem}}@media (min-width: 1024px){.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}</style></head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-amber-200">
 
-  <!-- 1. 顶部导航 -->
+  <!-- ================= 管理员专属顶部浮动栏（默认隐藏） ================= -->
+  <div id="admin-bar" class="sticky top-0 z-50 bg-slate-900 text-white px-4 py-3 shadow-2xl flex flex-wrap items-center justify-between border-b-2 border-amber-500 hidden">
+    <div class="flex items-center gap-3">
+      <span class="bg-amber-500 text-slate-950 font-black text-xs px-2.5 py-1 rounded">自由编辑模式已开启</span>
+      <span class="text-xs text-slate-300">💡 提示：鼠标点击页面任意文字即可直接修改。</span>
+    </div>
+    <div class="flex items-center gap-3 mt-2 sm:mt-0">
+      <button onclick="exportNewHTML()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-lg shadow transition flex items-center gap-1.5">
+        <i class="fas fa-download"></i> 一键导出新 index.html
+      </button>
+      <button onclick="exitAdminMode()" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-2 rounded-lg transition">
+        退出编辑模式
+      </button>
+    </div>
+  </div>
+
+  <!-- 1. 顶部导航栏 -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur shadow-sm border-b border-slate-100">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <span class="text-xl font-bold tracking-tight text-slate-900">Lim Mandarin Academy</span>
-      </div>
+      <a href="#" class="flex items-center space-x-2">
+        <span class="text-xl font-bold tracking-tight text-slate-900 editable-text">华 文 补 习</span>
+        <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded editable-text">Lim Mandarin Academy</span>
+      </a>
+      
+      <!-- 导航锚点 -->
       <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-        <a href="#about" class="hover:text-amber-600 transition">教学特色</a>
-        <a href="#courses" class="hover:text-amber-600 transition">课程体系</a>
-        <a href="#founder" class="hover:text-amber-600 transition">师资力量</a>
-        <a href="#faq" class="hover:text-amber-600 transition">常见问题</a>
+        <a href="#target" class="hover:text-amber-600 transition editable-text">涵盖考制</a>
+        <a href="#courses" class="hover:text-amber-600 transition editable-text">四大课程模块</a>
+        <a href="#schedule" class="hover:text-amber-600 transition editable-text">上课时间表</a>
+        <a href="#teacher" class="hover:text-amber-600 transition editable-text">师资背景</a>
+        <a href="#faq" class="hover:text-amber-600 transition editable-text">常见问题</a>
       </nav>
-      <a href="https://wa.me/60123456789?text=你好，我想咨询2026课程详情" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition flex items-center gap-2">
-        <i class="fab fa-whatsapp text-lg"></i>
-        <span>即刻咨询</span>
+
+      <!-- 快速 WhatsApp 咨询入口 -->
+      <a href="https://wa.me/60146023321?text=你好，我想咨询2027年LMA全线上课程详情" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition flex items-center gap-2">
+        <i class="fab fa-whatsapp text-base"></i>
+        <span class="editable-text">即刻报名</span>
       </a>
     </div>
   </header>
 
   <!-- 2. 首屏 Hero 区域 -->
-  <section class="relative bg-gradient-to-b from-amber-50/60 to-slate-50 py-20 px-4">
+  <section class="relative bg-gradient-to-b from-amber-50/70 via-slate-50/50 to-slate-50 py-16 md:py-24 px-4 border-b border-slate-100">
     <div class="max-w-4xl mx-auto text-center space-y-6">
-      <div class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-        2026 新学年课程热招中 · 全线上精锐小班与大班
+      <div class="inline-flex items-center gap-2 bg-amber-100/80 text-amber-900 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-amber-200">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+        <span class="editable-text">2027 全线上 新学年课程 · 精锐小班 &amp; 互动大班热招</span>
       </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-        用科学体系学华文，<br class="hidden sm:inline">让每一次下笔与思辨都有底气。
-      </h1>
-      <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-        告别死记硬背。独创“引、复、攻、息、战、魂”六步教学节奏，深耕 SPM 与中学生思维突破，助学生在考场与表达中脱颖而出。
-      </p>
-      <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#courses" class="bg-slate-900 hover:bg-slate-800 text-white px-8 py-3.5 rounded-xl font-medium shadow-md transition text-center">
-          浏览招生课程
+      
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight editable-text">华文教学 · 中小学<br class="hidden sm:inline">
+        <span class="text-amber-600">UASA | SPM&nbsp;</span></h1>
+      
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed editable-text">针对华小、国中、华中最新考制</p>
+
+      <!-- 快捷按钮群 -->
+      <div class="pt-2 flex flex-col sm:flex-row gap-3.5 justify-center items-center">
+        <a href="#courses" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-8 py-3.5 rounded-xl font-medium shadow-md transition text-center flex items-center justify-center gap-2">
+          <i class="fas fa-book-open text-xs"></i>
+          <span class="editable-text">浏览四大课程模块</span>
         </a>
-        <a href="https://wa.me/60123456789?text=你好，我想了解课程与排表" target="_blank" class="bg-white border border-slate-300 hover:border-slate-400 text-slate-700 px-8 py-3.5 rounded-xl font-medium shadow-sm transition text-center flex items-center justify-center gap-2">
-          <i class="fab fa-whatsapp text-emerald-600"></i>
-          获取完整时间表
+        <a href="#schedule" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-white px-8 py-3.5 rounded-xl font-medium shadow-md transition text-center flex items-center justify-center gap-2">
+          <i class="far fa-calendar-alt text-xs"></i>
+          <span class="editable-text">查看上课时间表</span>
+        </a>
+        <a href="https://wa.me/60146023321?text=你好林老师，我想咨询2027年课程与学费安排" target="_blank" class="w-full sm:w-auto bg-white border border-slate-300 hover:border-slate-400 text-slate-700 px-6 py-3.5 rounded-xl font-medium shadow-sm transition text-center flex items-center justify-center gap-2">
+          <i class="fab fa-whatsapp text-emerald-600 text-lg"></i>
+          <span class="editable-text">WhatsApp 014-6023321</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- 3. 痛点共鸣与特色 (Why Us) -->
-  <section id="about" class="py-16 max-w-6xl mx-auto px-4">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">为什么选择我们的课堂？</h2>
-      <p class="text-slate-500 mt-2 text-sm">不只是教知识，更是给学生一套终身受益的思维底座。</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
-        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-6">
-          <i class="fas fa-layer-group"></i>
-        </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-2">体系化答题逻辑</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">拆解文言文词性推导法、现代文深层意图剖析与考评局评分标准，学懂答题底逻辑。</p>
-      </div>
-      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
-        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-6">
-          <i class="fas fa-brain"></i>
-        </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-2">思辨写作与立意深度</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">跳脱八股套路，带入生活观察、历史文化与哲思角度，让作文具有说服力与灵魂深度。</p>
-      </div>
-      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
-        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-6">
-          <i class="fas fa-laptop-code"></i>
-        </div>
-        <h3 class="text-lg font-bold text-slate-900 mb-2">高互动全线上教学台</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">自主研发课堂互动平台，即时小测、倒计时演练与高清课堂回放，线上专注力不掉线。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. 课程矩阵 (Courses) -->
-  <section id="courses" class="py-16 bg-slate-100 px-4">
+  <!-- 3. 涵盖对象与考制模块 -->
+  <section id="target" class="py-12 bg-white border-b border-slate-100 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">2026 精选课程排表</h2>
-        <p class="text-slate-500 mt-2 text-sm">阶梯式课程体系，精准适配各年级中学生学习节奏。</p>
+      <div class="text-center mb-8">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 editable-text">Target Audiences &amp; Examinations</p>
+        <h2 class="text-xl font-bold text-slate-800 mt-1 editable-text">全面涵盖各校源与关键考制</h2>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- 课程卡片 1 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <span class="text-xs font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Form 1 - Form 3</span>
-            <h3 class="text-xl font-bold text-slate-900 mt-3">初中华文稳基培优班</h3>
-            <p class="text-slate-500 text-xs mt-1">建立语文语感 · 规范阅读与基础写作</p>
-            <hr class="my-4 border-slate-100">
-            <ul class="space-y-2.5 text-sm text-slate-600">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 核心文言虚词与常识积累</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 叙事抒情散文立意技巧</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 现代文概括与深层理解法</li>
-            </ul>
-          </div>
-          <div class="mt-8 pt-4 border-t border-slate-100">
-            <a href="https://wa.me/60123456789?text=我想了解初中华文班" target="_blank" class="w-full block text-center bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition text-sm">
-              了解班级时段与名额
-            </a>
-          </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-amber-300 transition">
+          <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-school"></i></div>
+          <div class="font-bold text-slate-800 text-sm editable-text">全校源适配</div>
+          <div class="text-xs text-slate-500 mt-1 editable-text">SJKC · SMK · SMJK</div>
         </div>
-
-        <!-- 课程卡片 2（突出推荐） -->
-        <div class="bg-white rounded-2xl p-6 border-2 border-amber-500 shadow-lg flex flex-col justify-between relative">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-            旗舰推荐
-          </div>
-          <div>
-            <span class="text-xs font-semibold bg-amber-50 text-amber-700 px-2.5 py-1 rounded-md">Form 4 - Form 5</span>
-            <h3 class="text-xl font-bold text-slate-900 mt-3">SPM 华文领航冲刺班</h3>
-            <p class="text-slate-500 text-xs mt-1">全面对标 SPM 最新考制 · A+ 战略指导</p>
-            <hr class="my-4 border-slate-100">
-            <ul class="space-y-2.5 text-sm text-slate-600">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 独家议论文论证结构与素材库</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 考评标准答题规范与采分点拆解</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 包含随堂仿真模拟与一对一批改反馈</li>
-            </ul>
-          </div>
-          <div class="mt-8 pt-4 border-t border-slate-100">
-            <a href="https://wa.me/60123456789?text=我想了解SPM华文冲刺班" target="_blank" class="w-full block text-center bg-amber-500 hover:bg-amber-600 text-white font-medium py-2.5 rounded-xl transition text-sm shadow-sm">
-              抢先预留席位
-            </a>
-          </div>
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-amber-300 transition">
+          <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-file-signature"></i></div>
+          <div class="font-bold text-slate-800 text-sm editable-text">官方应试冲刺</div>
+          <div class="text-xs text-slate-500 mt-1 editable-text">UASA | PT3 | SPM</div>
         </div>
-
-        <!-- 课程卡片 3 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <span class="text-xs font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">专项定制</span>
-            <h3 class="text-xl font-bold text-slate-900 mt-3">VIP 针对性提分个训</h3>
-            <p class="text-slate-500 text-xs mt-1">弱项诊断 · 定制进阶学习方案</p>
-            <hr class="my-4 border-slate-100">
-            <ul class="space-y-2.5 text-sm text-slate-600">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 针对阅读障碍或写作瓶颈一对一辅导</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 弹性制定上课节奏与针对性作业批改</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-xs"></i> 适合冲刺特等或需要深度重塑基础的学生</li>
-            </ul>
-          </div>
-          <div class="mt-8 pt-4 border-t border-slate-100">
-            <a href="https://wa.me/60123456789?text=我想咨询VIP个训" target="_blank" class="w-full block text-center bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition text-sm">
-              咨询专属排期
-            </a>
-          </div>
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-amber-300 transition">
+          <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-user-tie"></i></div>
+          <div class="font-bold text-slate-800 text-sm editable-text">成人与职场华文</div>
+          <div class="text-xs text-slate-500 mt-1 editable-text">Adult Mandarin Chinese</div>
+        </div>
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-amber-300 transition">
+          <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-chalkboard-teacher"></i></div>
+          <div class="font-bold text-slate-800 text-sm editable-text">班级规模</div>
+          <div class="text-xs text-slate-500 mt-1 editable-text">精锐小班 · 互动大班 · 1v1 定制</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5. 常见问题 FAQ -->
-  <section id="faq" class="py-16 max-w-4xl mx-auto px-4">
-    <div class="text-center mb-12">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">常见问题解答</h2>
-      <p class="text-slate-500 mt-2 text-sm">关于报名、授课形式与配套细节。</p>
+  <!-- 4. 四大课程核心模块 -->
+  <section id="courses" class="py-16 max-w-6xl mx-auto px-4">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable-text">Curriculum Matrix</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable-text">四大核心课程模块</h2>
+      <p class="text-slate-500 mt-2 text-sm editable-text">按年级阶梯科学规划，深耕华文与学科核心素养。</p>
     </div>
-    <div class="space-y-4">
-      <div class="bg-white p-6 rounded-xl border border-slate-200">
-        <h4 class="font-bold text-slate-900 text-base">学生请假或缺席怎么办？</h4>
-        <p class="text-slate-600 text-sm mt-2 leading-relaxed">所有线上课程均配备专属学习回放后台。请假学生可在课后随时观看高清录播，并可随时向老师提交该堂课的课后练习进行批改。</p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <!-- 模块 1：Std 6 -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-amber-400 hover:shadow-lg transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold bg-amber-50 text-amber-700 px-2.5 py-1 rounded-lg editable-text">小学衔接</span>
+            <i class="fas fa-flask text-amber-500"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 editable-text">Std 6 小学华文 &amp; 科学</h3>
+          <p class="text-xs text-slate-500 mt-1 editable-text">稳固基础 · 提前接轨中学语文与思维</p>
+          <hr class="my-4 border-slate-100">
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">华文：UASA 阅读理解深度推导与规范作答</span></li>
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">华文：命题作文架构与语言润色</span></li>
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">科学：核心实验概念拆解与答题关键字锁定</span></li>
+          </ul>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-100">
+          <a href="https://wa.me/60146023321?text=你好林老师，我想咨询Std6小学华文与科学课程" target="_blank" class="w-full block text-center bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 rounded-xl text-xs transition">
+            <span class="editable-text">咨询 Std 6 课程详情</span>
+          </a>
+        </div>
       </div>
-      <div class="bg-white p-6 rounded-xl border border-slate-200">
-        <h4 class="font-bold text-slate-900 text-base">教材是如何分发的？</h4>
-        <p class="text-slate-600 text-sm mt-2 leading-relaxed">正式学员会获得精心排版的专属电子讲义（可直接打印或导入平板学习），涵盖独家考点整理、范文库与精编作业。</p>
+
+      <!-- 模块 2：Form 1 - 3 -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-amber-400 hover:shadow-lg transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg editable-text">初中奠基</span>
+            <i class="fas fa-book-reader text-blue-500"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 editable-text">初中华文 Form 1 - 3</h3>
+          <p class="text-xs text-slate-500 mt-1 editable-text">UASA / PT3 考制通关 · 告别死背</p>
+          <hr class="my-4 border-slate-100">
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">文言文：虚词词性推断法，消除阅读恐惧</span></li>
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">白话文：概括主旨与深层句意解析</span></li>
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">叙事抒情文：立意升华与精炼选材</span></li>
+          </ul>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-100">
+          <a href="https://wa.me/60146023321?text=你好林老师，我想咨询初中华文Form1-3课程" target="_blank" class="w-full block text-center bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 rounded-xl text-xs transition">
+            <span class="editable-text">咨询初中华文排期</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 模块 3：Form 4 - 5（旗舰推荐） -->
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-500 shadow-md hover:shadow-xl transition flex flex-col justify-between relative">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider editable-text">
+          旗舰领航
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-lg editable-text">SPM 冲刺</span>
+            <i class="fas fa-award text-amber-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 editable-text">高中华文 Form 4 - 5</h3>
+          <p class="text-xs text-slate-500 mt-1 editable-text">全面对标 SPM 最新评卷准则 · 冲刺 A/A+</p>
+          <hr class="my-4 border-slate-100">
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">议论文：思辨模型、多维度论据与立意深度</span></li>
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">考评采分点拆解：文言/现代文踩点作答</span></li>
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">真题演练与一对一批改反馈</span></li>
+          </ul>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-100">
+          <a href="https://wa.me/60146023321?text=你好林老师，我想报名SPM高中华文冲刺班" target="_blank" class="w-full block text-center bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 rounded-xl text-xs transition shadow-sm">
+            <span class="editable-text">抢先预留 SPM 席位</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 模块 4：1v1 教学 -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-amber-400 hover:shadow-lg transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold bg-purple-50 text-purple-700 px-2.5 py-1 rounded-lg editable-text">专项突破</span>
+            <i class="fas fa-user-graduate text-purple-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 editable-text">1v1 针对性教学</h3>
+          <p class="text-xs text-slate-500 mt-1 editable-text">一对一弱项诊断 · 专属进阶教学方案</p>
+          <hr class="my-4 border-slate-100">
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">精准诊断学生痛点（写作慢、阅读理解抓不住分）</span></li>
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">弹性协商上课时间，因材施教</span></li>
+            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-0.5"></i> <span class="editable-text">适合短时间冲刺或需要重塑信心的学员</span></li>
+          </ul>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-100">
+          <a href="https://wa.me/60146023321?text=你好林老师，我想咨询1v1个训安排" target="_blank" class="w-full block text-center bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 rounded-xl text-xs transition">
+            <span class="editable-text">定制专属 1v1 课时</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. 2027 上课时间表模块 -->
+  <section id="schedule" class="py-16 bg-slate-100 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-semibold bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full uppercase tracking-wider editable-text">Timetable &amp; Planning</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable-text">2027 新学年上课时间表</h2>
+        <p class="text-slate-500 mt-2 text-sm editable-text">科学错峰排课，每堂课专注高效推进（90 分钟精细打磨）。</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 text-xs uppercase font-semibold">
+              <tr>
+                <th class="p-4 editable-text">课程项目</th>
+                <th class="p-4 editable-text">班级类别</th>
+                <th class="p-4 editable-text">参考时段</th>
+                <th class="p-4 text-center editable-text">状态</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              <tr class="hover:bg-amber-50/40 transition">
+                <td class="p-4 font-bold text-slate-900 editable-text">Std 6 小学华文 &amp; 科学</td>
+                <td class="p-4 editable-text">精锐小班</td>
+                <td class="p-4 editable-text">周六 / 周日下午班</td>
+                <td class="p-4 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs px-2.5 py-0.5 rounded-full font-medium editable-text">热招中</span></td>
+              </tr>
+              <tr class="hover:bg-amber-50/40 transition">
+                <td class="p-4 font-bold text-slate-900 editable-text">初中华文 Form 1 - 3</td>
+                <td class="p-4 editable-text">小班 / 互动班</td>
+                <td class="p-4 editable-text">平日晚上 7:30 - 9:00 PM</td>
+                <td class="p-4 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs px-2.5 py-0.5 rounded-full font-medium editable-text">开放预录</span></td>
+              </tr>
+              <tr class="hover:bg-amber-50/40 transition">
+                <td class="p-4 font-bold text-slate-900 editable-text">高中华文 Form 4 - 5 (SPM)</td>
+                <td class="p-4 editable-text">旗舰领航班</td>
+                <td class="p-4 editable-text">平日晚上 8:00 - 9:30 PM</td>
+                <td class="p-4 text-center"><span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-0.5 rounded-full font-bold editable-text">席位有限</span></td>
+              </tr>
+              <tr class="hover:bg-amber-50/40 transition">
+                <td class="p-4 font-bold text-slate-900 editable-text">1v1 针对性教学 / 成人华文</td>
+                <td class="p-4 editable-text">专属 VIP</td>
+                <td class="p-4 editable-text">与老师协商专属时段</td>
+                <td class="p-4 text-center"><span class="bg-blue-100 text-blue-700 text-xs px-2.5 py-0.5 rounded-full font-medium editable-text">预约排期</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="p-4 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+          <span class="editable-text">* 详细年级准确开班星期与时间，请直接联系林老师索取完整 PDF 排表。</span>
+          <a href="https://wa.me/60146023321?text=你好林老师，我想索取2027年完整课程时间表" target="_blank" class="text-amber-600 font-bold hover:underline editable-text">
+            索取完整排表 &gt;
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. 页脚与版权 -->
-  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p>© 2026 Lim Mandarin Academy. 保留所有权利。</p>
-      <p class="text-xs text-slate-500">以严谨体系成就学术高度，以人文情怀滋养学子心灵。</p>
+  <!-- 6. 师资力量模块 -->
+  <section id="teacher" class="py-16 max-w-5xl mx-auto px-4">
+    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-8">
+      
+      <!-- 照片区域 -->
+      <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden shadow-md flex-shrink-0 bg-slate-100 border border-slate-200 flex items-center justify-center relative group">
+        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="林老师" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+      </div>
+
+      <!-- 文字介绍 -->
+      <div class="space-y-4 text-left">
+        <div class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full editable-text">
+          课程创办人 &amp; 主讲名师
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 editable-text">林老师 (Teacher Lim)</h2>
+        <p class="text-amber-700 font-medium text-sm editable-text">拉曼大学中文系 · 前独中华文组主任 · 深耕华文应试与思维训练</p>
+        <p class="text-slate-600 text-sm leading-relaxed editable-text">
+          深谙马来西亚各校源（SJKC / SMK / SMJK）学生的学习痛点与考评局采分逻辑。独创“引、复、攻、息、战、魂”六步教学节奏，配合自主研发的线上高互动全能教学台，把抽象深奥的文言与作文拆解为可迁移的思维框架，带领无数中学生突破瓶颈，决胜 SPM！
+        </p>
+        <div class="flex flex-wrap gap-2 pt-2">
+          <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-lg editable-text">严谨学术体系</span>
+          <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-lg editable-text">满分立意写作</span>
+          <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-lg editable-text">文言虚词解码</span>
+          <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-lg editable-text">高互动在线课堂</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. 常见问题 FAQ -->
+  <section id="faq" class="py-16 bg-slate-100 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="text-xs font-semibold bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full uppercase tracking-wider editable-text">Help Center</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable-text">家长与学员常见疑问</h2>
+        <p class="text-slate-500 mt-2 text-sm editable-text">透明规范的教务安排，让在线学习毫无后顾之忧。</p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <i class="far fa-calendar-times text-amber-500"></i>
+            <span class="editable-text">学生因校务或生病请假，可以补课吗？</span>
+          </h4>
+          <p class="text-slate-600 text-sm mt-3 leading-relaxed pl-6 editable-text">
+            <strong>完全不用担心缺漏进度。</strong> 我们的全线上课堂均配备专属高清课堂回放后台。学生请假后，可在课后随时登入系统复看该堂课的完整录播，讲义重点一处不落；针对该堂课的练习作业，依然可以直接提交给老师进行一对一批改反馈。
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <i class="fas fa-book-open text-amber-500"></i>
+            <span class="editable-text">课程教材如何提供？需要额外购买书本吗？</span>
+          </h4>
+          <p class="text-slate-600 text-sm mt-3 leading-relaxed pl-6 editable-text">
+            正式注册学员将享有独家编撰的体系化讲义。教材包含核心知识点整理、经典文言释义、SPM 范文库及随堂练习题。我们会在开课前统一下发专属排版高清电子教材（适合 iPad/平板无纸化学习或自行打印），无需额外采购昂贵参考书。
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <i class="fas fa-laptop text-amber-500"></i>
+            <span class="editable-text">线上课程需要准备哪些上课设备？</span>
+          </h4>
+          <p class="text-slate-600 text-sm mt-3 leading-relaxed pl-6 editable-text">
+            只需一台联网正常的电脑、笔记本平板或 iPad 即可上课。课堂采用稳定顺畅的线上视讯平台搭配自主教学全能台，操作极为简便，报名后教务老师会提供详尽的进班指引。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 页脚 -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm px-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="text-center sm:text-left">
+        <span class="text-white font-bold text-lg editable-text">Lim Mandarin Academy (LMA)</span>
+        <p class="text-xs text-slate-500 mt-1 editable-text">© 2027 Lim Mandarin Academy. 保留所有权利。</p>
+      </div>
+      <div class="text-center sm:text-right">
+        <p class="text-xs text-slate-400 editable-text">官方咨询专线 WhatsApp：+60 14-602 3321</p>
+        <p class="text-xs text-slate-500 mt-0.5 editable-text">以严谨体系成就学术高度，以人文情怀滋养学子心灵。</p>
+      </div>
     </div>
   </footer>
 
-  <!-- 7. 右下角悬浮 WhatsApp 快速咨询入口（转化核心） -->
-  <a href="https://wa.me/60123456789?text=你好，我想咨询2026年华文课程报名详情" target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl transition transform hover:scale-105 flex items-center justify-center">
+  <!-- 9. 右下角固定悬浮 WhatsApp -->
+  <a href="https://wa.me/60146023321?text=你好林老师，我想咨询2027年华文补习课程" target="_blank" class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white p-3.5 sm:p-4 rounded-full shadow-2xl transition transform hover:scale-105 flex items-center gap-2">
     <i class="fab fa-whatsapp text-2xl"></i>
+    <span class="hidden sm:inline text-xs font-bold pr-1">立即咨询</span>
   </a>
 
-</body>
-</html>
+  <!-- ================= 管理员暗门入口（页面左下角隐蔽小齿轮） ================= -->
+  <button onclick="promptAdminLogin()" title="后台管理" class="fixed bottom-6 left-6 z-30 w-8 h-8 rounded-full bg-slate-200/50 hover:bg-slate-800 hover:text-white text-slate-500 flex items-center justify-center transition opacity-40 hover:opacity-100">
+    <i class="fas fa-cog text-xs"></i>
+  </button>
+
+  <!-- ================= 纯前端编辑与导出核心引擎 ================= -->
+  <script>
+    // 管理员密码，默认 lma2027
+    const ADMIN_PASS = "lma2027";
+
+    function promptAdminLogin() {
+      const pwd = prompt("请输入管理员编辑密码：");
+      if (pwd === ADMIN_PASS) {
+        enableEditMode();
+      } else if (pwd !== null) {
+        alert("密码错误，无法进入编辑模式！");
+      }
+    }
+
+    function enableEditMode() {
+      document.body.classList.add("is-editing");
+      document.getElementById("admin-bar").classList.remove("hidden");
+      
+      // 开启所有可编辑区域
+      document.querySelectorAll(".editable-text").forEach(el => {
+        el.setAttribute("contenteditable", "true");
+      });
+      alert("✅ 已进入管理员编辑模式！点击网页上任意文字即可直接修改。");
+    }
+
+    function exitAdminMode() {
+      document.body.classList.remove("is-editing");
+      document.getElementById("admin-bar").classList.add("hidden");
+      
+      // 关闭可编辑属性
+      document.querySelectorAll(".editable-text").forEach(el => {
+        el.removeAttribute("contenteditable");
+      });
+    }
+
+    function exportNewHTML() {
+      // 导出前先临时恢复到公网访客看到的整洁状态
+      exitAdminMode();
+
+      // 抓取当前页面最新的完整源代码
+      const currentDocType = "<!DOCTYPE html>\n";
+      const fullHtml = currentDocType + document.documentElement.outerHTML;
+
+      // 触发浏览器静默下载 index.html
+      const blob = new Blob([fullHtml], { type: "text/html;charset=utf-8" });
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = "index.html";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+
+      alert("🎉 新版 index.html 已成功下载到您的电脑！\n\n【下一步操作】：\n直接把下载的文件拖入 GitHub 文件夹替换旧文件，然后在 GitHub Desktop 点击 Commit & Push 即可全网更新！");
+    }
+  </script>
+
+
+</body></html>
