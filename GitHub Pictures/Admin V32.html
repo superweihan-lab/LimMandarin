@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【Lim Mandarin Academy】官方主页 - 智造工坊 (PRO 旗舰稳定版 v32)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .font-kaiti { font-family: 'Ma Shan Zheng', cursive, serif; }
+    .font-songti { font-family: 'Noto Serif SC', serif; }
+    .font-heiti { font-family: 'Noto Sans SC', sans-serif; }
+
+    [contenteditable="true"] {
+      outline: 1px dashed rgba(245, 158, 11, 0.4);
+      outline-offset: 1px;
+      cursor: text;
+    }
+    [contenteditable="true"]:hover { background-color: rgba(254, 243, 199, 0.25); }
+    [contenteditable="true"]:focus { outline: 2px solid #f59e0b; background-color: #ffffff; }
+
+    .brand-title, .nav-link-item, .lock-nowrap {
+      white-space: nowrap !important;
+      word-break: keep-all !important;
+    }
+    @media (max-width: 640px) {
+      .brand-title { font-size: 16px !important; line-height: 1.2 !important; }
+      .brand-subtag { font-size: 9px !important; padding: 2px 4px !important; white-space: nowrap !important; }
+      .hero-main-title { font-size: clamp(22px, 6vw, 28px) !important; line-height: 1.3 !important; }
+      .hero-sub-title { font-size: clamp(18px, 5vw, 22px) !important; }
+      .mobile-safe-flex { flex-wrap: nowrap !important; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    }
+
+    .block-hover-zone { position: relative; }
+    .block-ctrl-bar { opacity: 0; transition: opacity 0.15s ease-in-out; }
+    .block-hover-zone:hover .block-ctrl-bar { opacity: 1; }
+
+    .item-hover-zone { position: relative; padding-right: 2rem; }
+    .item-ctrl-bar { display: none; }
+    .item-hover-zone:hover .item-ctrl-bar { display: flex; }
+
+    .hover-lift {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .resizer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 6px;
+      cursor: col-resize;
+      user-select: none;
+      touch-action: none;
+      height: 100%;
+    }
+    .resizer:hover, .resizing { background-color: #f59e0b; }
+    th { position: relative; }
+
+    /* 手机端无横移紧凑表格优化 */
+    @media (max-width: 767px) {
+      .compact-mobile-table {
+        table-layout: fixed !important;
+        width: 100% !important;
+      }
+      .compact-mobile-table th, .compact-mobile-table td {
+        padding: 8px 4px !important;
+        font-size: 11px !important;
+        line-height: 1.3 !important;
+        word-break: break-word !important;
+      }
+      .compact-mobile-table .status-badge {
+        font-size: 9px !important;
+        padding: 2px 4px !important;
+      }
+    }
+
+    #custom-context-menu {
+      display: none;
+      position: fixed;
+      z-index: 999999;
+      width: 320px;
+      max-height: 540px;
+      overflow-y: auto;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+    #custom-context-menu button {
+      width: 100%;
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      color: #e2e8f0;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      cursor: pointer;
+    }
+    #custom-context-menu button:hover { background: #f59e0b; color: #020617; font-weight: bold; }
+
+    .video-responsive {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+    .video-responsive iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-heiti antialiased selection:bg-amber-200 pb-36">
+
+  <!-- ================= 顶部全局控制台 ================= -->
+  <div id="admin-topbar" class="sticky top-0 z-50 bg-slate-900/95 text-white px-4 py-2.5 shadow-2xl border-b-2 border-amber-500 backdrop-blur flex flex-wrap items-center justify-between gap-2 text-xs">
+    <div class="flex items-center gap-2">
+      <span class="bg-amber-500 text-slate-950 font-black px-2 py-0.5 rounded">LMA 智造工坊</span>
+      <span id="save-status-tag" class="text-emerald-400 font-mono text-[11px] flex items-center gap-1">
+        <i class="fas fa-check-circle"></i> 自动存盘正常
+      </span>
+    </div>
+
+    <!-- 文本格式化工具组 -->
+    <div class="flex flex-wrap items-center gap-1.5 bg-slate-800 p-1 rounded-lg border border-slate-700">
+      <button onmousedown="event.preventDefault(); execStyle('bold');" class="px-2 py-1 bg-slate-700 hover:bg-slate-600 rounded font-bold" title="加粗">B</button>
+      <button onmousedown="event.preventDefault(); execStyle('italic');" class="px-2 py-1 bg-slate-700 hover:bg-slate-600 rounded italic font-serif" title="斜体">I</button>
+      
+      <select id="font-size-select" onchange="applyCustomFontSize(this.value)" class="bg-slate-700 text-amber-300 font-bold rounded px-2 py-1 outline-none" title="精细选择文字大小">
+        <option value="">字号大小</option>
+        <option value="12px">12px (极小)</option>
+        <option value="14px">14px (正文)</option>
+        <option value="16px">16px (标准)</option>
+        <option value="18px">18px (小标)</option>
+        <option value="20px">20px (中标题)</option>
+        <option value="24px">24px (大标题)</option>
+        <option value="28px">28px (醒目)</option>
+        <option value="32px">32px (特大)</option>
+        <option value="36px">36px (巨幅)</option>
+        <option value="48px">48px (Hero)</option>
+      </select>
+
+      <button onmousedown="event.preventDefault(); adjustSelectionFontSize(2);" class="px-2 py-1 bg-slate-700 hover:bg-slate-600 rounded font-bold text-amber-300" title="放大2px">+A</button>
+      <button onmousedown="event.preventDefault(); adjustSelectionFontSize(-2);" class="px-2 py-1 bg-slate-700 hover:bg-slate-600 rounded text-slate-300" title="缩小2px">-A</button>
+      
+      <select id="font-family-select" onchange="applyFontFamily(this.value)" class="bg-slate-700 text-white rounded px-2 py-1 outline-none">
+        <option value="font-heiti">黑体</option>
+        <option value="font-songti">宋体</option>
+        <option value="font-kaiti">楷体</option>
+      </select>
+
+      <select id="line-height-select" onchange="applyLineHeight(this.value)" class="bg-slate-700 text-white rounded px-2 py-1 outline-none font-medium" title="调节行高">
+        <option value="1.5">↕ 行距: 1.5</option>
+        <option value="1.0">↕ 行距: 1.0</option>
+        <option value="1.2">↕ 行距: 1.2</option>
+        <option value="1.4">↕ 行距: 1.4</option>
+        <option value="1.8">↕ 行距: 1.8</option>
+        <option value="2.0">↕ 行距: 2.0</option>
+        <option value="2.5">↕ 行距: 2.5</option>
+      </select>
+
+      <div class="flex items-center bg-slate-700 rounded p-0.5">
+        <button onmousedown="event.preventDefault(); applyAlignment('left');" class="px-1.5 py-0.5 hover:bg-slate-600 rounded"><i class="fas fa-align-left"></i></button>
+        <button onmousedown="event.preventDefault(); applyAlignment('center');" class="px-1.5 py-0.5 hover:bg-slate-600 rounded"><i class="fas fa-align-center"></i></button>
+        <button onmousedown="event.preventDefault(); applyAlignment('right');" class="px-1.5 py-0.5 hover:bg-slate-600 rounded"><i class="fas fa-align-right"></i></button>
+      </div>
+
+      <div class="flex items-center gap-1.5 bg-slate-900 px-2 py-1 rounded border border-slate-700">
+        <div class="flex items-center gap-1" title="修改选中文本的颜色">
+          <span class="text-[10px] text-emerald-300 font-bold">文字色:</span>
+          <input type="color" id="text-color-picker" oninput="applyTextColorDirect(this.value)" class="w-4 h-4 rounded cursor-pointer border-0 p-0 bg-transparent">
+        </div>
+        <span class="text-slate-600">|</span>
+        <div class="flex items-center gap-1" title="先点击任意卡片、按钮或格子，再选此处的颜色，即可无限改变底色！">
+          <span class="text-[10px] text-amber-300 font-bold">万能底色:</span>
+          <input type="color" id="bg-color-picker" oninput="applyBgColorDirect(this.value)" class="w-4 h-4 rounded cursor-pointer border-0 p-0 bg-transparent">
+        </div>
+      </div>
+
+      <button onclick="openSmartAiModal()" class="px-2.5 py-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded font-bold shadow animate-pulse flex items-center gap-1">
+        <i class="fas fa-robot"></i> 🤖 智能补充助手
+      </button>
+
+      <button onmousedown="event.preventDefault(); batchChangePhone();" class="px-2 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold">
+        <i class="fas fa-phone-alt"></i> 统改号码
+      </button>
+    </div>
+
+    <!-- 导入 / 备份原型 / 导出控制 -->
+    <div class="flex items-center gap-1.5">
+      <label class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1 cursor-pointer" title="全模块深度映射：导入旧版 index.html 或 admin-backup.html 智能无缝融合">
+        <i class="fas fa-file-import"></i>
+        <span>导入旧版智能融合</span>
+        <input type="file" accept=".html" onchange="importAndMergeOldHtml(event)" class="hidden">
+      </label>
+
+      <button onclick="exportAdminPrototype()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2.5 py-1.5 rounded-lg transition flex items-center gap-1" title="将当下所有最新修改内容保存为新的 admin.html 原型分身">
+        🛠️ 备份 Admin 原型
+      </button>
+
+      <button onclick="resetToDefaultLayout()" class="bg-rose-700 hover:bg-rose-600 text-white font-bold px-2 py-1.5 rounded-lg transition" title="清空错位缓存">
+        🔄 恢复默认
+      </button>
+
+      <button onclick="exportProductionIndex()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-1.5 rounded-lg shadow-lg transition flex items-center gap-1.5" title="导出绝对干净、无任何 Admin 痕迹的公网页面">
+        <i class="fas fa-file-export"></i> 💾 导出 index
+      </button>
+    </div>
+  </div>
+
+  <!-- Admin 智能补充助手弹窗 -->
+  <div id="smart-ai-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-xl rounded-3xl p-6 text-white shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="text-base font-bold text-amber-400 flex items-center gap-2">
+          <i class="fas fa-magic"></i> Admin 智能信息补充助手
+        </h3>
+        <button onclick="closeSmartAiModal()" class="text-slate-400 hover:text-white text-sm font-bold">✕ 关闭</button>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        粘贴排期课程、家长好评或最新新闻报道，助手会自动解析分类，新增至相应模块！
+      </p>
+      <textarea id="ai-input-text" rows="6" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none focus:border-amber-500 font-mono" placeholder="例如：
+【新课程】初中华文特训班 周六 2:00-3:30PM 林老师
+【新新闻】LMA 荣获全马线上教育创新大奖！"></textarea>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeSmartAiModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-2 rounded-xl">取消</button>
+        <button onclick="processSmartAiInput()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-5 py-2 rounded-xl shadow">✨ 确认并智能补充</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右键上下文菜单 -->
+  <div id="custom-context-menu" class="admin-only">
+    <div id="selection-link-panel" class="border-b border-slate-700 pb-1 mb-1">
+      <div class="px-3 py-1 bg-amber-950/80 text-[10px] text-amber-300 font-bold flex items-center gap-1">
+        <i class="fas fa-link"></i> <span id="link-target-type-label">选中文本/图片链接绑定：</span>
+      </div>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#achievement-section'))"><i class="fas fa-trophy text-amber-400"></i> 🔗 链接至：成绩殿堂模块</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#exclusive-section'))"><i class="fas fa-fire text-amber-500"></i> 🔗 链接至：作文批改团队</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#courses-section'))"><i class="fas fa-book text-blue-400"></i> 🔗 链接至：四大课程模块</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#timetable-section'))"><i class="fas fa-calendar-alt text-emerald-400"></i> 🔗 链接至：时间表模块</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#google-reviews-section'))"><i class="fab fa-google text-red-400"></i> 🔗 链接至：Google Review 模块</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#blog-section'))"><i class="fas fa-newspaper text-cyan-400"></i> 🔗 链接至：新闻动态 Blog 模块</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#testimonials-section'))"><i class="fas fa-star text-amber-400"></i> 🔗 链接至：学员好评墙模块</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#teacher-section'))"><i class="fas fa-user-graduate text-indigo-400"></i> 🔗 链接至：师资团队模块</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('#faq-section'))"><i class="fas fa-question-circle text-purple-400"></i> 🔗 链接至：FAQ 常见问题</button>
+      <button type="button" onclick="executeMenuAction(() => linkCurrentTargetTo('custom'))"><i class="fas fa-globe text-cyan-400"></i> 🔗 自定义 URL / WhatsApp 链接...</button>
+      <button type="button" onclick="executeMenuAction(() => removeCurrentTargetLink())" class="text-rose-400"><i class="fas fa-unlink"></i> ❌ 移除超链接</button>
+      <div class="border-t border-slate-700 my-1"></div>
+    </div>
+    
+    <div class="px-3 py-1.5 bg-slate-950 text-[10px] text-amber-400 font-bold border-b border-slate-800">
+      ➕ 在此处下方插入新模块：
+    </div>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('highlight-badge'))"><i class="fas fa-fire text-amber-500"></i> 🔥 插入“王牌作文批改团队”吸睛爆点模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('blog'))"><i class="fas fa-newspaper text-cyan-400"></i> 📰 插入“LMA 独家动态 / 新闻报道 (Blog)”模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('cta'))"><i class="fab fa-whatsapp text-emerald-400"></i> 🔘 插入独立按钮 / 报名条</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('google-reviews'))"><i class="fab fa-google text-red-400"></i> ⭐ 插入“Google Review”真实评价模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('achievement'))"><i class="fas fa-trophy text-amber-400"></i> 🏆 插入“成绩殿堂”数字滚动模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('courses'))"><i class="fas fa-columns text-emerald-400"></i> 📚 插入“四大课程矩阵”模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('timetable'))"><i class="fas fa-calendar-alt text-indigo-400"></i> 📅 插入“上课时间表”模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('testimonials'))"><i class="fas fa-images text-pink-400"></i> 🖼️ 插入“学员好评多图翻页墙”模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('teacher'))"><i class="fas fa-user-graduate text-cyan-400"></i> 👨‍🏫 插入“主讲名师”卡片模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('faq'))"><i class="fas fa-question-circle text-purple-400"></i> ❓ 插入“常见问题 FAQ”模块</button>
+    <button type="button" onclick="executeMenuAction(() => insertBlockFromMenu('video'))"><i class="fab fa-youtube text-red-500"></i> 🎬 插入 YouTube 视频模块</button>
+  </div>
+
+  <!-- 主内容包裹层 -->
+  <div id="main-content-zone" class="space-y-4">
+
+    <!-- 1. 顶部导航栏 -->
+    <header class="bg-white/95 shadow-sm border-b border-slate-100 block-hover-zone sticky top-10 z-40">
+      <div class="max-w-6xl mx-auto px-3 sm:px-4 h-16 flex items-center justify-between gap-2 mobile-safe-flex">
+        <div class="flex items-center space-x-2 sm:space-x-3 flex-nowrap shrink-0 overflow-hidden">
+          <div class="flex items-center gap-1.5 shrink-0">
+            <div class="h-9 w-9 sm:h-10 sm:w-10 rounded-lg overflow-hidden flex items-center justify-center bg-slate-100 border border-slate-200 shrink-0">
+              <img id="site-logo" src="logo.png" alt="Logo" class="max-h-full max-w-full object-contain" onerror="this.onerror=null; this.src='logo.jpg';">
+            </div>
+            <label class="admin-only bg-slate-100 hover:bg-slate-200 text-slate-700 text-[9px] px-1.5 py-1 rounded border border-slate-300 cursor-pointer shrink-0">
+              换Logo
+              <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+            </label>
+          </div>
+
+          <div class="flex items-center space-x-1 sm:space-x-1.5 flex-nowrap shrink-0">
+            <span class="brand-title text-lg sm:text-xl font-bold tracking-tight text-slate-900 editable" contenteditable="true">华文补习</span>
+            <span class="brand-subtag text-[10px] sm:text-xs bg-amber-100 text-amber-800 font-semibold px-1.5 sm:px-2 py-0.5 rounded editable" contenteditable="true">Lim Mandarin Academy</span>
+          </div>
+        </div>
+        
+        <div class="hidden md:flex space-x-5 lg:space-x-6 text-sm font-medium text-slate-600 shrink-0">
+          <a href="#achievement-section" class="nav-link-item hover:text-amber-600 transition editable-link editable" contenteditable="true">成绩殿堂</a>
+          <a href="#courses-section" class="nav-link-item hover:text-amber-600 transition editable-link editable" contenteditable="true">四大课程</a>
+          <a href="#timetable-section" class="nav-link-item hover:text-amber-600 transition editable-link editable" contenteditable="true">时间表</a>
+          <a href="#google-reviews-section" class="nav-link-item hover:text-amber-600 transition editable-link editable" contenteditable="true">Google Review</a>
+          <a href="#blog-section" class="nav-link-item hover:text-amber-600 transition editable-link editable" contenteditable="true">最新动态</a>
+          <a href="#testimonials-section" class="nav-link-item hover:text-amber-600 transition editable-link editable" contenteditable="true">学员好评</a>
+          <a href="#teacher-section" class="nav-link-item hover:text-amber-600 transition editable-link editable" contenteditable="true">师资团队</a>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="https://wa.me/60146023321?text=你好，我想咨询2027年LMA全线上课程详情" target="_blank" class="editable-link bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium shadow-sm flex items-center gap-1 sm:gap-2 lock-nowrap editable" contenteditable="true" title="按住 Alt 点击修改链接">
+            <i class="fab fa-whatsapp text-sm sm:text-base" contenteditable="false"></i>
+            <span class="editable" contenteditable="true">即刻报名</span>
+          </a>
+
+          <button onclick="toggleMobileMenu()" class="md:hidden bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-2 rounded-xl text-sm" title="手机端导航菜单">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-dropdown-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-3 space-y-2 text-sm font-medium text-slate-700 shadow-lg">
+        <a href="#achievement-section" onclick="toggleMobileMenu()" class="block py-1.5 hover:text-amber-600">🏆 成绩殿堂</a>
+        <a href="#courses-section" onclick="toggleMobileMenu()" class="block py-1.5 hover:text-amber-600">📚 四大课程</a>
+        <a href="#timetable-section" onclick="toggleMobileMenu()" class="block py-1.5 hover:text-amber-600">📅 时间表</a>
+        <a href="#google-reviews-section" onclick="toggleMobileMenu()" class="block py-1.5 hover:text-amber-600">⭐ Google Review</a>
+        <a href="#blog-section" onclick="toggleMobileMenu()" class="block py-1.5 hover:text-amber-600">📰 最新动态</a>
+        <a href="#testimonials-section" onclick="toggleMobileMenu()" class="block py-1.5 hover:text-amber-600">🖼️ 学员好评</a>
+        <a href="#teacher-section" onclick="toggleMobileMenu()" class="block py-1.5 hover:text-amber-600">👨‍🏫 师资团队</a>
+      </div>
+    </header>
+
+    <!-- 2. 首屏 Hero 区域 -->
+    <section class="relative bg-gradient-to-b from-amber-50/70 via-slate-50/50 to-slate-50 py-12 sm:py-18 px-4 border-b border-slate-100 block-hover-zone text-center">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+      </div>
+      <div class="max-w-4xl mx-auto space-y-5 sm:space-y-6">
+        <div class="inline-flex items-center gap-2 bg-amber-100/80 text-amber-900 text-xs font-semibold px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-amber-200">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0"></span>
+          <span class="editable" contenteditable="true">2027 全线上 新学年课程 · 精锐小班 & 互动大班热招</span>
+        </div>
+        
+        <h1 class="hero-main-title text-2xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-snug editable" contenteditable="true">
+          华文教学 · 中小学补习<br>
+          <span class="hero-sub-title text-amber-600 block mt-1 sm:mt-0">让每一次下笔与思辨都有底气</span>
+        </h1>
+        
+        <p class="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed editable" contenteditable="true">
+          华小、国中、华中最新考制 · 全方位思维升华
+        </p>
+
+        <div id="hero-buttons-container" class="pt-2 flex flex-wrap gap-3 justify-center items-center">
+          <div class="relative group inline-block">
+            <div class="admin-only absolute -top-3 right-0 flex gap-1 z-10 opacity-0 group-hover:opacity-100 transition">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-600 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-600 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="cloneHeroButton(this)" class="bg-emerald-600 text-white text-[9px] px-1 rounded font-bold shadow">➕</button>
+              <button onclick="removeHeroButton(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded shadow">🗑️</button>
+            </div>
+            <a href="#achievement-section" class="editable-link inline-block bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl font-medium text-center text-sm lock-nowrap editable hover-lift" contenteditable="true" title="按住 Alt 点击修改链接">成绩有底气</a>
+          </div>
+
+          <div class="relative group inline-block">
+            <div class="admin-only absolute -top-3 right-0 flex gap-1 z-10 opacity-0 group-hover:opacity-100 transition">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-600 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-600 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="cloneHeroButton(this)" class="bg-emerald-600 text-white text-[9px] px-1 rounded font-bold shadow">➕</button>
+              <button onclick="removeHeroButton(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded shadow">🗑️</button>
+            </div>
+            <a href="#timetable-section" class="editable-link inline-block bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-xl font-medium text-center text-sm lock-nowrap editable hover-lift" contenteditable="true" title="按住 Alt 点击修改链接">2027 时间表</a>
+          </div>
+
+          <div class="relative group inline-block">
+            <div class="admin-only absolute -top-3 right-0 flex gap-1 z-10 opacity-0 group-hover:opacity-100 transition">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-600 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-600 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="cloneHeroButton(this)" class="bg-emerald-600 text-white text-[9px] px-1 rounded font-bold shadow">➕</button>
+              <button onclick="removeHeroButton(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded shadow">🗑️</button>
+            </div>
+            <a href="https://wa.me/60146023321?text=你好林老师，我想咨询2027年课程与学费安排" target="_blank" class="editable-link inline-flex items-center gap-2 bg-white border border-slate-300 text-slate-700 px-6 py-3 rounded-xl font-medium text-center text-sm lock-nowrap editable shadow-sm hover-lift" contenteditable="true" title="按住 Alt 点击修改链接">
+              <i class="fab fa-whatsapp text-emerald-600 text-base" contenteditable="false"></i>
+              <span class="editable" contenteditable="true">WhatsApp联系</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 【独家王牌模块】王牌作文批改团队 -->
+    <section id="exclusive-section" class="py-8 max-w-4xl mx-auto px-4 block-hover-zone text-center">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+
+      <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 rounded-3xl p-6 sm:p-8 text-white shadow-xl hover-lift block-hover-zone relative overflow-hidden">
+        <div class="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div class="space-y-2 text-center sm:text-left">
+            <span class="bg-white/20 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest editable" contenteditable="true">🔥 独家王牌优势</span>
+            <h3 class="text-xl sm:text-2xl font-black tracking-tight editable" contenteditable="true">独家精锐作文批改团队 · 逐字精批</h3>
+            <p class="text-white/90 text-xs sm:text-sm max-w-xl editable" contenteditable="true">告别千篇一律的套话！每个字眼、每个立意均由资深华文名师亲自精细拆解，直击 SPM 采分盲点，让丢分变拿分！</p>
+          </div>
+          <div class="flex-shrink-0 flex flex-col items-center">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-white/20 border-2 border-white/40 flex items-center justify-center shadow-md">
+              <img src="badge.jpg" alt="王牌图标" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/200x200/ffffff/d97706?text=VIP';">
+            </div>
+            <label class="admin-only bg-white/30 hover:bg-white/40 text-white text-[9px] px-2 py-0.5 rounded mt-1 inline-block cursor-pointer">
+              换图
+              <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 成绩 Achievement 模块 -->
+    <section id="achievement-section" class="py-14 bg-gradient-to-br from-amber-50 to-orange-100 px-4 block-hover-zone border-y border-amber-200">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+      <div class="max-w-6xl mx-auto text-center">
+        <span class="text-xs font-semibold bg-amber-200 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Proven Track Record</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">LMA 历年教学坚实成就</h2>
+        <p class="text-slate-600 mt-2 text-sm max-w-xl mx-auto editable" contenteditable="true">用稳扎稳打的培育成效与 A 等战绩，见证每一位孩子的华文蜕变。</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10" id="achievement-cards-grid">
+          <div class="bg-white/90 backdrop-blur border border-amber-200 p-6 rounded-2xl shadow-lg hover:shadow-xl transition block-hover-zone hover-lift relative group">
+            <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            </div>
+            <div class="text-3xl sm:text-4xl font-black text-amber-600 font-mono mb-1">
+              <span class="counter editable font-bold" contenteditable="true" data-target="300" onblur="syncCounterTarget(this)">300</span>+
+            </div>
+            <div class="text-xs sm:text-sm text-slate-700 font-bold editable" contenteditable="true">培养学生总数</div>
+          </div>
+          <div class="bg-white/90 backdrop-blur border border-amber-200 p-6 rounded-2xl shadow-lg hover:shadow-xl transition block-hover-zone hover-lift relative group">
+            <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            </div>
+            <div class="text-3xl sm:text-4xl font-black text-amber-600 font-mono mb-1">
+              <span class="counter editable font-bold" contenteditable="true" data-target="10" onblur="syncCounterTarget(this)">10</span>+
+            </div>
+            <div class="text-xs sm:text-sm text-slate-700 font-bold editable" contenteditable="true">优秀教师阵容</div>
+          </div>
+          <div class="bg-white/90 backdrop-blur border border-amber-200 p-6 rounded-2xl shadow-lg hover:shadow-xl transition block-hover-zone hover-lift relative group">
+            <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            </div>
+            <div class="text-3xl sm:text-4xl font-black text-amber-600 font-mono mb-1">
+              <span class="counter editable font-bold" contenteditable="true" data-target="100" onblur="syncCounterTarget(this)">100</span>+
+            </div>
+            <div class="text-xs sm:text-sm text-slate-700 font-bold editable" contenteditable="true">优秀学生高光代表</div>
+          </div>
+          <div class="bg-white/90 backdrop-blur border border-amber-200 p-6 rounded-2xl shadow-lg hover:shadow-xl transition block-hover-zone hover-lift relative group">
+            <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            </div>
+            <div class="text-3xl sm:text-4xl font-black text-amber-600 font-mono mb-1">
+              <span class="counter editable font-bold" contenteditable="true" data-target="30" onblur="syncCounterTarget(this)">30</span>+
+            </div>
+            <div class="text-xs sm:text-sm text-slate-700 font-bold editable" contenteditable="true">SPM 华文 A 等斩获者</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 涵盖对象与考制模块 -->
+    <section class="py-12 bg-white border-b border-slate-100 px-4 block-hover-zone">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-8">
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 editable" contenteditable="true">Target Audiences & Examinations</p>
+          <h2 class="text-xl font-bold text-slate-800 mt-1 editable" contenteditable="true">涵盖各校源与关键考制</h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 block-hover-zone hover-lift">
+            <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-school"></i></div>
+            <div class="font-bold text-slate-800 text-sm editable" contenteditable="true">全校源适配</div>
+            <div class="text-xs text-slate-500 mt-1 editable" contenteditable="true">SJKC · SMK · SMJK</div>
+          </div>
+          <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 block-hover-zone hover-lift">
+            <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-file-signature"></i></div>
+            <div class="font-bold text-slate-800 text-sm editable" contenteditable="true">官方应试冲刺</div>
+            <div class="text-xs text-slate-500 mt-1 editable" contenteditable="true">UASA | PT3 | SPM</div>
+          </div>
+          <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 block-hover-zone hover-lift">
+            <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-user-tie"></i></div>
+            <div class="font-bold text-slate-800 text-sm editable" contenteditable="true">成人与职场华文/英文</div>
+            <div class="text-xs text-slate-500 mt-1 editable" contenteditable="true">Adult Mandarin Chinese</div>
+          </div>
+          <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 block-hover-zone hover-lift">
+            <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div class="font-bold text-slate-800 text-sm editable" contenteditable="true">班级规模</div>
+            <div class="text-xs text-slate-500 mt-1 editable" contenteditable="true">精锐小班 · 互动大班 · 1v1 定制</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 四大核心课程模块 -->
+    <section id="courses-section" class="py-16 max-w-6xl mx-auto px-4 block-hover-zone">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+      </div>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Curriculum Matrix</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">四大核心课程模块</h2>
+        <p class="text-slate-500 mt-2 text-sm editable" contenteditable="true">按年级阶梯科学规划，深耕华文与学科核心素养。</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="courses-cards-container">
+        <!-- 模块 1：Std 6 -->
+        <div class="block-hover-zone bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between relative group hover-lift">
+          <div class="block-ctrl-bar absolute -top-3.5 right-4 flex gap-1 z-20 admin-only">
+            <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+            <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            <button onclick="cloneCourseCard(this)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-2 py-0.5 rounded shadow font-bold" title="复制此课程卡片">➕ 复制</button>
+            <button onclick="removeElement(this)" class="bg-rose-500 hover:bg-rose-600 text-white text-xs px-2 py-0.5 rounded shadow" title="删除此课程卡片">🗑️</button>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold bg-amber-50 text-amber-700 px-2.5 py-1 rounded-lg editable" contenteditable="true">小学衔接</span>
+              <i class="fas fa-flask text-amber-500"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 editable" contenteditable="true">Std 6 小学华文 & 科学</h3>
+            <p class="text-xs text-slate-500 mt-1 editable" contenteditable="true">稳固基础 · 提前接轨中学语文与思维</p>
+            <hr class="my-4 border-slate-100">
+            <ul class="space-y-2 text-xs text-slate-600">
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">UASA 理解文 & 解题心法</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">供料 & 命题作文架构与语言润色</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">科学：科学原理与答题</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <a href="https://wa.me/60146023321?text=你好林老师，我想咨询Std6小学华文与科学课程" target="_blank" class="editable-link w-full block text-center bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 rounded-xl text-xs transition cursor-pointer lock-nowrap editable" contenteditable="true" title="按住 Alt 点击修改链接">
+              <span class="editable" contenteditable="true">咨询 Std 6 课程详情</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 模块 2：Form 1 - 3 -->
+        <div class="block-hover-zone bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between relative group hover-lift">
+          <div class="block-ctrl-bar absolute -top-3.5 right-4 flex gap-1 z-20 admin-only">
+            <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+            <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            <button onclick="cloneCourseCard(this)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-2 py-0.5 rounded shadow font-bold" title="复制此课程卡片">➕ 复制</button>
+            <button onclick="removeElement(this)" class="bg-rose-500 hover:bg-rose-600 text-white text-xs px-2 py-0.5 rounded shadow" title="删除此课程卡片">🗑️</button>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg editable" contenteditable="true">初中奠基</span>
+              <i class="fas fa-book-reader text-blue-500"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 editable" contenteditable="true">初中华文 Form 1 - 3</h3>
+            <p class="text-xs text-slate-500 mt-1 editable" contenteditable="true">UASA / PT3 考制通关 · 告别死背</p>
+            <hr class="my-4 border-slate-100">
+            <ul class="space-y-2 text-xs text-slate-600">
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">文言文：以故事理解 & 作答</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">理解文：概括主旨与深层句意解析</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">作文：陪练大纲、立意升华</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <a href="https://wa.me/60146023321?text=你好林老师，我想咨询初中华文Form1-3课程" target="_blank" class="editable-link w-full block text-center bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 rounded-xl text-xs transition cursor-pointer lock-nowrap editable" contenteditable="true" title="按住 Alt 点击修改链接">
+              <span class="editable" contenteditable="true">咨询初中华文排期</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 模块 3：Form 4 - 5 -->
+        <div class="block-hover-zone bg-white rounded-2xl p-6 border-2 border-amber-500 shadow-md flex flex-col justify-between relative group hover-lift">
+          <div class="block-ctrl-bar absolute -top-3.5 right-4 flex gap-1 z-20 admin-only">
+            <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+            <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            <button onclick="cloneCourseCard(this)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-2 py-0.5 rounded shadow font-bold" title="复制此课程卡片">➕ 复制</button>
+            <button onclick="removeElement(this)" class="bg-rose-500 hover:bg-rose-600 text-white text-xs px-2 py-0.5 rounded shadow" title="删除此课程卡片">🗑️</button>
+          </div>
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider editable" contenteditable="true">
+            旗舰领航
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-lg editable" contenteditable="true">SPM 冲刺</span>
+              <i class="fas fa-award text-amber-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 editable" contenteditable="true">高中华文 Form 4 - 5</h3>
+            <p class="text-xs text-slate-500 mt-1 editable" contenteditable="true">全面对标 SPM 最新评卷准则 · 冲刺</p>
+            <hr class="my-4 border-slate-100">
+            <ul class="space-y-2 text-xs text-slate-600">
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">应用文 & 作文：思辨模型与立意</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">考评采分点拆解：踩点得分</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">真题演练与一对一批改反馈</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <a href="https://wa.me/60146023321?text=你好林老师，我想报名SPM高中华文冲刺班" target="_blank" class="editable-link w-full block text-center bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 rounded-xl text-xs transition shadow-sm cursor-pointer lock-nowrap editable" contenteditable="true" title="按住 Alt 点击修改链接">
+              <span class="editable" contenteditable="true">抢先预留 SPM 席位</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 模块 4：1v1 教学 -->
+        <div class="block-hover-zone bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between relative group hover-lift">
+          <div class="block-ctrl-bar absolute -top-3.5 right-4 flex gap-1 z-20 admin-only">
+            <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+            <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            <button onclick="cloneCourseCard(this)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-2 py-0.5 rounded shadow font-bold" title="复制此课程卡片">➕ 复制</button>
+            <button onclick="removeElement(this)" class="bg-rose-500 hover:bg-rose-600 text-white text-xs px-2 py-0.5 rounded shadow" title="删除此课程卡片">🗑️</button>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold bg-purple-50 text-purple-700 px-2.5 py-1 rounded-lg editable" contenteditable="true">专项突破</span>
+              <i class="fas fa-user-graduate text-purple-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 editable" contenteditable="true">1v1 针对性教学</h3>
+            <p class="text-xs text-slate-500 mt-1 editable" contenteditable="true">一对一弱项诊断 · 专属进阶教学方案</p>
+            <hr class="my-4 border-slate-100">
+            <ul class="space-y-2 text-xs text-slate-600">
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">精准诊断学生痛点（写作慢、抓不住分）</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">弹性协商上课时间，因材施教</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+              <li class="item-hover-zone flex items-start gap-2 group/item">
+                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                <span class="editable flex-1" contenteditable="true">适合短时间冲刺或需重塑信心的学员</span>
+                <span class="item-ctrl-bar absolute right-0 top-0 gap-1 admin-only">
+                  <button onclick="cloneFeatureItem(this)" class="bg-emerald-500 text-white text-[9px] px-1 rounded">➕</button>
+                  <button onclick="removeFeatureItem(this)" class="bg-rose-500 text-white text-[9px] px-1 rounded">🗑️</button>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <a href="https://wa.me/60146023321?text=你好林老师，我想咨询1v1个训安排" target="_blank" class="editable-link w-full block text-center bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 rounded-xl text-xs transition cursor-pointer lock-nowrap editable" contenteditable="true" title="按住 Alt 点击修改链接">
+              <span class="editable" contenteditable="true">定制专属 1v1 课时</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 2027 上课时间表模块 (手机端紧凑自适应排版，绝无横向滚动浪费) -->
+    <section id="timetable-section" class="py-14 bg-slate-100 px-3 sm:px-4 block-hover-zone">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-6">
+          <span class="text-xs font-semibold bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Timetable & Planning</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">2027 新学年上课时间表</h2>
+          <p class="text-slate-500 mt-2 text-xs sm:text-sm editable" contenteditable="true">科学错峰排课。电脑端自由拉伸宽度；手机端自适应紧凑整行排版，阅读舒适无横移。</p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-end gap-2 mb-3 admin-only">
+          <button onclick="addTableColumn()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3 py-1.5 rounded-xl shadow transition flex items-center gap-1">
+            <i class="fas fa-columns"></i> ➕ 增加列
+          </button>
+          <button onclick="removeTableColumn()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-3 py-1.5 rounded-xl shadow transition flex items-center gap-1">
+            <i class="fas fa-columns"></i> ➖ 减少列
+          </button>
+          <button onclick="addTableRow()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-xl shadow-md transition flex items-center gap-1.5">
+            <i class="fas fa-plus-circle text-sm"></i> ➕ 新增一行
+          </button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+          <table class="compact-mobile-table w-full text-left text-sm border-collapse" id="schedule-table">
+            <thead id="schedule-head" class="bg-slate-50 border-b border-slate-200 text-slate-600 text-xs uppercase font-semibold">
+              <tr>
+                <th class="p-3 sm:p-4 editable relative" contenteditable="true" style="width: 32%;">课程项目<div class="resizer" onmousedown="initResize(event)"></div></th>
+                <th class="p-3 sm:p-4 editable relative" contenteditable="true" style="width: 32%;">上课时段<div class="resizer" onmousedown="initResize(event)"></div></th>
+                <th class="p-3 sm:p-4 editable relative" contenteditable="true" style="width: 22%;">老师/备注<div class="resizer" onmousedown="initResize(event)"></div></th>
+                <th class="p-2 sm:p-4 text-center editable relative" contenteditable="true" style="width: 14%;">状态<div class="resizer" onmousedown="initResize(event)"></div></th>
+                <th class="p-2 sm:p-4 text-center admin-only" style="width: 12%;">操作</th>
+              </tr>
+            </thead>
+            <tbody id="schedule-body" class="divide-y divide-slate-100 text-slate-700">
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">六年级华语</td><td class="p-3 sm:p-4 editable" contenteditable="true">周一 5:00-6:15PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">常规班</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">六年级华语</td><td class="p-3 sm:p-4 editable" contenteditable="true">周二 4:00-5:15PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">华语理解-黄</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">六年级华语</td><td class="p-3 sm:p-4 editable" contenteditable="true">周三 5:00-6:15PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">常规班</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">六年级华语</td><td class="p-3 sm:p-4 editable" contenteditable="true">周四 4:00-5:15PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">华语作文-黄</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">六年级华语</td><td class="p-3 sm:p-4 editable" contenteditable="true">周五 5:00-6:15PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">常规班</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">国中一 F1 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周四 8:30-10:00PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">国中一 F1 科学</td><td class="p-3 sm:p-4 editable" contenteditable="true">周五 8:30-10:00PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">俞老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">国中一 F1 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周六 6:00-7:15PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">国中二 F2 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周五 8:30-10:00PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">国中三 F3 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周一 6:00-7:15PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">国中三 F3 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周四 7:00-8:30PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">高中 F4/F5 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周一 8:00-9:30PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">高中 F4/F5 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周三 8:00-9:30PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">高中 F4/F5 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周五 8:00-9:30PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">王老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">高中 F4/F5 华文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周六 8:00-9:30PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">高中 F4/F5 英文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周一 8:00-9:30PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">魏老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-purple-100 text-purple-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">高中 F4/F5 英文</td><td class="p-3 sm:p-4 editable" contenteditable="true">周三 8:00-9:30PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">魏老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-purple-100 text-purple-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">高中 F4 生物 Bio</td><td class="p-3 sm:p-4 editable" contenteditable="true">周二 5:30-7:00PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">魏老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-purple-100 text-purple-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+              <tr class="hover:bg-amber-50/40 transition"><td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">高中 F5 生物 Bio</td><td class="p-3 sm:p-4 editable" contenteditable="true">周一 5:30-7:00PM</td><td class="p-3 sm:p-4 editable" contenteditable="true">魏老师</td><td class="p-2 sm:p-4 text-center"><span class="status-badge bg-purple-100 text-purple-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招</span></td><td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1"><button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button><button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button><button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Google Review 真实商家评价模块 (3个一组平滑加载 + 卡片排序移动) -->
+    <section id="google-reviews-section" class="py-14 bg-white border-y border-slate-100 px-4 block-hover-zone">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+      <div class="max-w-6xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 bg-red-50 text-red-600 text-xs font-semibold px-3 py-1 rounded-full border border-red-200 mb-3">
+          <i class="fab fa-google" contenteditable="false"></i>
+          <span class="editable" contenteditable="true">Google Business Verified Reviews</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 editable" contenteditable="true">来自 Google 用户的五星真实好评</h2>
+        <p class="text-slate-500 mt-2 text-sm editable" contenteditable="true">真实口碑见证，点击右下角 Google 图标可直接跳转至商家主页。</p>
+
+        <div class="flex justify-end mt-4 mb-2 admin-only">
+          <button onclick="addGoogleReviewCard()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
+            <i class="fas fa-plus-circle text-sm"></i> ➕ 新增一个 Google 好评卡片
+          </button>
+        </div>
+
+        <div id="google-reviews-grid" class="grid md:grid-cols-3 gap-6 mt-4 text-left">
+          <div class="review-card-item bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm block-hover-zone flex flex-col justify-between hover-lift relative group">
+            <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="this.closest('.review-card-item').remove(); autoSaveDraft(); renderReviewPagination();" class="bg-rose-500 text-white text-xs px-1.5 py-0.5 rounded shadow">🗑️</button>
+            </div>
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">
+                <i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i>
+              </div>
+              <p class="text-slate-700 text-xs sm:text-sm leading-relaxed editable" contenteditable="true">
+                “林老师的华文课非常注重思维逻辑，不再是死记硬背！孩子上了一年后，SPM华文写作有如神助，直接拿了A，太感谢LMA了！”
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span class="font-bold text-xs text-slate-900 editable" contenteditable="true">家长 陈女士 (Google Review)</span>
+              <a href="https://maps.app.goo.gl/k1sz5K7BCeA8KJwE6" target="_blank" class="text-blue-600 hover:text-blue-700 font-black text-base" title="点击跳转至 Google 商家主页">
+                <i class="fab fa-google"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="review-card-item bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm block-hover-zone flex flex-col justify-between hover-lift relative group">
+            <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="this.closest('.review-card-item').remove(); autoSaveDraft(); renderReviewPagination();" class="bg-rose-500 text-white text-xs px-1.5 py-0.5 rounded shadow">🗑️</button>
+            </div>
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">
+                <i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i>
+              </div>
+              <p class="text-slate-700 text-xs sm:text-sm leading-relaxed editable" contenteditable="true">
+                “全能教学台互动性极高，文言文讲解生动深刻，学生真正学会了如何作答！”
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span class="font-bold text-xs text-slate-900 editable" contenteditable="true">学员 张同学 (Google Review)</span>
+              <a href="https://maps.app.goo.gl/k1sz5K7BCeA8KJwE6" target="_blank" class="text-blue-600 hover:text-blue-700 font-black text-base">
+                <i class="fab fa-google"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="review-card-item bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm block-hover-zone flex flex-col justify-between hover-lift relative group">
+            <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+              <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="this.closest('.review-card-item').remove(); autoSaveDraft(); renderReviewPagination();" class="bg-rose-500 text-white text-xs px-1.5 py-0.5 rounded shadow">🗑️</button>
+            </div>
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">
+                <i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i>
+              </div>
+              <p class="text-slate-700 text-xs sm:text-sm leading-relaxed editable" contenteditable="true">
+                “老师认真负责，每周的作文精细批改让孩子受益匪浅，真心推荐给大家！”
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span class="font-bold text-xs text-slate-900 editable" contenteditable="true">家长 李太太 (Google Review)</span>
+              <a href="https://maps.app.goo.gl/k1sz5K7BCeA8KJwE6" target="_blank" class="text-blue-600 hover:text-blue-700 font-black text-base">
+                <i class="fab fa-google"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3个一组平滑加载控制器 -->
+        <div class="mt-8 flex justify-center gap-3">
+          <button id="load-more-reviews-btn" onclick="loadMoreReviews()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-6 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+            <span>👇 查看更多真实好评</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8.5 LMA 独家动态 / 新闻报道 (Blog 专栏模块，支持卡片排序) -->
+    <section id="blog-section" class="py-14 max-w-6xl mx-auto px-4 block-hover-zone">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+
+      <div class="text-center mb-10">
+        <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">LMA News & Media</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">最新动态与独家新闻报道</h2>
+        <p class="text-slate-500 mt-2 text-sm editable" contenteditable="true">记录机构成长足迹、教育心得分享与最新媒体报道。</p>
+
+        <div class="flex justify-end mt-4 admin-only">
+          <button onclick="addBlogCard()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
+            <i class="fas fa-plus-circle text-sm"></i> ➕ 新增一篇新闻/Blog文章
+          </button>
+        </div>
+      </div>
+
+      <div id="blog-cards-grid" class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col justify-between group block-hover-zone hover-lift">
+          <div class="block-ctrl-bar absolute top-2 right-2 z-10 admin-only flex gap-1">
+            <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+            <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+            <button onclick="cloneBlogCard(this)" class="bg-emerald-600 text-white text-xs px-2 py-0.5 rounded shadow">➕</button>
+            <button onclick="removeBlogCard(this)" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️</button>
+          </div>
+          <div>
+            <div class="aspect-[16/9] bg-slate-100 overflow-hidden relative">
+              <img src="blog1.jpg" alt="新闻封面" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x338/f8fafc/94a3b8?text=请上传新闻配图';">
+              <label class="admin-only absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer">
+                📷 更换文章封面图
+                <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+              </label>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between text-xs text-amber-600 font-semibold mb-2">
+                <span class="editable" contenteditable="true">媒体报道</span>
+                <span class="text-slate-400 editable" contenteditable="true">2026-09-01</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2 editable" contenteditable="true">LMA 2027 新学年全线上课程正式发布，引领华文教育新标杆</h3>
+              <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 editable" contenteditable="true">
+                本院独创六步教学法与全能教学平台在双溪龙备受瞩目，新学年全面面向全马中小学生开放线上精英席位...
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-0">
+            <a href="https://wa.me/60146023321?text=你好，我想了解新闻报道中的课程详情" target="_blank" class="editable-link text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1" contenteditable="true" title="按住 Alt 点击修改链接">
+              <span>阅读全文 / 咨询详情</span> <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. 学员家长好评墙 -->
+    <section id="testimonials-section" class="py-14 max-w-6xl mx-auto px-4 block-hover-zone">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+
+      <div class="text-center mb-8">
+        <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Student & Parent Testimonials</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">学员与家长真实好评墙</h2>
+        <p class="text-slate-500 mt-2 text-sm editable" contenteditable="true">支持多图同屏多列展示，点击左右箭头无缝翻页浏览口碑截图。</p>
+      </div>
+
+      <div class="relative bg-white p-6 rounded-3xl border border-slate-200 shadow-sm max-w-5xl mx-auto overflow-hidden">
+        <div id="multi-testimonial-slider" class="flex transition-transform duration-500 ease-in-out gap-4">
+          <div class="testimonial-slide-item w-full md:w-1/3 flex-shrink-0 px-1 relative group">
+            <div class="admin-only absolute top-2 right-3 z-20 flex gap-1">
+              <button onclick="moveSlideItem(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveSlideItem(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="this.closest('.testimonial-slide-item').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-[9px] px-1 rounded shadow">🗑️</button>
+            </div>
+            <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 aspect-[4/3] flex items-center justify-center relative group">
+              <img src="review1.jpg" alt="好评 1" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x450/f8fafc/94a3b8?text=请放入+review1.jpg';">
+              <label class="admin-only absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer">
+                📷 替换图片
+                <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+              </label>
+            </div>
+          </div>
+          <div class="testimonial-slide-item w-full md:w-1/3 flex-shrink-0 px-1 relative group">
+            <div class="admin-only absolute top-2 right-3 z-20 flex gap-1">
+              <button onclick="moveSlideItem(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveSlideItem(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="this.closest('.testimonial-slide-item').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-[9px] px-1 rounded shadow">🗑️</button>
+            </div>
+            <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 aspect-[4/3] flex items-center justify-center relative group">
+              <img src="review2.jpg" alt="好评 2" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x450/f8fafc/94a3b8?text=请放入+review2.jpg';">
+              <label class="admin-only absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer">
+                📷 替换图片
+                <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+              </label>
+            </div>
+          </div>
+          <div class="testimonial-slide-item w-full md:w-1/3 flex-shrink-0 px-1 relative group">
+            <div class="admin-only absolute top-2 right-3 z-20 flex gap-1">
+              <button onclick="moveSlideItem(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveSlideItem(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="this.closest('.testimonial-slide-item').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-[9px] px-1 rounded shadow">🗑️</button>
+            </div>
+            <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 aspect-[4/3] flex items-center justify-center relative group">
+              <img src="review3.jpg" alt="好评 3" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x450/f8fafc/94a3b8?text=请放入+review3.jpg';">
+              <label class="admin-only absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer">
+                📷 替换图片
+                <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="prevMultiSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-slate-900/70 hover:bg-slate-900 text-white w-10 h-10 rounded-full flex items-center justify-center shadow transition z-10"><i class="fas fa-chevron-left text-sm"></i></button>
+        <button onclick="nextMultiSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-slate-900/70 hover:bg-slate-900 text-white w-10 h-10 rounded-full flex items-center justify-center shadow transition z-10"><i class="fas fa-chevron-right text-sm"></i></button>
+
+        <div class="flex justify-center items-center gap-3 mt-6 admin-only">
+          <label class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-4 py-2 rounded-xl shadow cursor-pointer flex items-center gap-1.5">
+            <i class="fas fa-plus-circle"></i> ➕ 上传并新增一张好评截图
+            <input type="file" accept="image/*" onchange="addNewMultiReviewCard(event)" class="hidden">
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. 师资团队 -->
+    <section id="teacher-section" class="py-12 max-w-5xl mx-auto px-4 block-hover-zone">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-6 sm:gap-8 block-hover-zone hover-lift">
+        <div class="flex flex-col items-center gap-2 flex-shrink-0">
+          <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-2xl overflow-hidden shadow-md bg-slate-100 border border-slate-200 flex items-center justify-center">
+            <img src="teacher.jpg" alt="主讲名师" class="teacher-img w-full h-full object-cover" onerror="this.onerror=null; this.src='teacher.png';">
+          </div>
+          <label class="admin-only bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] px-2.5 py-1 rounded border border-slate-300 cursor-pointer">
+            换照片预览
+            <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+          </label>
+        </div>
+
+        <div class="space-y-3 text-left flex-1">
+          <div class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full editable" contenteditable="true">
+            课程创办人 & 主讲名师
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 editable" contenteditable="true">林老师 (Teacher Lim)</h2>
+          <p class="text-amber-700 font-medium text-sm editable" contenteditable="true">拉曼大学中文系 · 前独中华文组主任 · 深耕华文应试与思维训练</p>
+          <p class="text-slate-600 text-sm leading-relaxed editable" contenteditable="true">
+            深谙马来西亚各校源（SJKC / SMK / SMJK）学生的学习痛点与考评局采分逻辑。独创“引、复、攻、息、战、魂”六步教学节奏，配合自主研发的线上高互动全能教学台，把抽象深奥的文言与作文拆解为可迁移的思维框架，带领无数中学生突破瓶颈，决胜 SPM！
+          </p>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-lg editable" contenteditable="true">严谨学术体系</span>
+            <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-lg editable" contenteditable="true">满分立意写作</span>
+            <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-lg editable" contenteditable="true">文言虚词解码</span>
+            <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-lg editable" contenteditable="true">高互动在线课堂</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. 常见问题 FAQ (支持卡片上移下移与删除) -->
+    <section id="faq-section" class="py-14 bg-slate-100 px-4 block-hover-zone">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+        <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+        <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+          <span class="text-xs font-semibold bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Help Center</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">家长与学员常见疑问</h2>
+          <p class="text-slate-500 mt-2 text-sm editable" contenteditable="true">透明规范的教务安排，让在线学习毫无后顾之忧。</p>
+        </div>
+
+        <div class="flex justify-end mb-3 admin-only">
+          <button onclick="addFaqItem()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
+            <i class="fas fa-plus-circle text-sm"></i> ➕ 新增一条 FAQ 问答
+          </button>
+        </div>
+
+        <div id="faq-container" class="space-y-4">
+          <div class="faq-card-item bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative group block-hover-zone hover-lift">
+            <div class="block-ctrl-bar absolute top-4 right-4 admin-only flex gap-1">
+              <button onclick="moveCardVertically(this, -1)" class="bg-slate-700 text-white text-xs px-1.5 py-0.5 rounded shadow">⬆</button>
+              <button onclick="moveCardVertically(this, 1)" class="bg-slate-700 text-white text-xs px-1.5 py-0.5 rounded shadow">⬇</button>
+              <button onclick="this.closest('.faq-card-item').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
+              <i class="far fa-calendar-times text-amber-500" contenteditable="false"></i>
+              <span class="editable" contenteditable="true">学生因校务或生病请假，可以补课吗？</span>
+            </h4>
+            <p class="text-slate-600 text-sm mt-3 leading-relaxed pl-6 editable" contenteditable="true">
+              <strong>完全不用担心缺漏进度。</strong> 我们的全线上课堂均配备专属高清课堂回放后台。学生请假后，可在课后随时登入系统复看该堂课的完整录播，讲义重点一处不落；针对该堂课的练习作业，依然可以直接提交给老师进行一对一批改反馈。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. 页脚 -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm px-4 block-hover-zone text-center sm:text-left relative z-10">
+      <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+        <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow" title="将底部上移">⬆ 上移</button>
+      </div>
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="text-white font-bold text-lg editable" contenteditable="true">Lim Mandarin Academy (LMA)</span>
+          <p class="text-xs text-slate-500 mt-1 editable" contenteditable="true">© 2027 Lim Mandarin Academy. 保留所有权利。</p>
+        </div>
+        <div class="text-center sm:text-right">
+          <p class="text-xs text-slate-400 editable" contenteditable="true">官方咨询专线 WhatsApp：+60 14-602 3321</p>
+          <p class="text-xs text-slate-500 mt-0.5 editable" contenteditable="true">以严谨体系成就学术高度，以人文情怀滋养学子心灵。</p>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /main-content-zone -->
+
+  <!-- ================= 编辑与导出核心脚本 ================= -->
+  <script>
+    let savedRange = null;
+    let rightClickedElement = null;
+    let lastClickedElement = null;
+    let activeRightClickTarget = null;
+    let visibleReviewCount = 3;
+    const STORAGE_KEY = 'lma_admin_safe_backup_v32';
+
+    function openSmartAiModal() {
+      document.getElementById('smart-ai-modal').classList.remove('hidden');
+    }
+    function closeSmartAiModal() {
+      document.getElementById('smart-ai-modal').classList.add('hidden');
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-dropdown-menu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    function saveSelection() {
+      const sel = window.getSelection();
+      if (sel.rangeCount > 0 && !sel.isCollapsed) {
+        savedRange = sel.getRangeAt(0).cloneRange();
+      }
+    }
+    document.addEventListener('selectionchange', saveSelection);
+
+    function restoreSelection() {
+      if (savedRange) {
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(savedRange);
+      }
+    }
+
+    function execStyle(command) {
+      restoreSelection();
+      document.execCommand(command, false, null);
+      autoSaveDraft();
+    }
+
+    function syncCounterTarget(el) {
+      let num = el.innerText.replace(/[^0-9]/g, '');
+      if (num) {
+        el.setAttribute('data-target', num);
+        el.innerText = num;
+      }
+      autoSaveDraft();
+    }
+
+    function applyCustomFontSize(sizeVal) {
+      if (!sizeVal) return;
+      restoreSelection();
+      const sel = window.getSelection();
+      if (!sel.rangeCount || sel.isCollapsed) {
+        if (lastClickedElement) {
+          lastClickedElement.style.fontSize = sizeVal;
+          autoSaveDraft();
+        }
+        document.getElementById('font-size-select').value = '';
+        return;
+      }
+      const range = sel.getRangeAt(0);
+      const span = document.createElement('span');
+      span.style.fontSize = sizeVal;
+      span.appendChild(range.extractContents());
+      range.insertNode(span);
+      autoSaveDraft();
+      document.getElementById('font-size-select').value = '';
+    }
+
+    function adjustSelectionFontSize(delta) {
+      restoreSelection();
+      const sel = window.getSelection();
+      
+      if (!sel.rangeCount || sel.isCollapsed) {
+        if (lastClickedElement) {
+          let curSize = parseFloat(window.getComputedStyle(lastClickedElement).fontSize) || 16;
+          lastClickedElement.style.fontSize = Math.max(10, Math.min(72, curSize + delta)) + 'px';
+          autoSaveDraft();
+        }
+        return;
+      }
+
+      const range = sel.getRangeAt(0);
+      const container = range.commonAncestorContainer;
+      const targetNode = container.nodeType === 3 ? container.parentNode : container;
+      let curSize = parseFloat(window.getComputedStyle(targetNode).fontSize) || 16;
+      let newSize = Math.max(10, Math.min(72, curSize + delta)) + 'px';
+
+      const span = document.createElement('span');
+      span.style.fontSize = newSize;
+      try {
+        span.appendChild(range.extractContents());
+        range.insertNode(span);
+        const newRange = document.createRange();
+        newRange.selectNodeContents(span);
+        sel.removeAllRanges();
+        sel.addRange(newRange);
+        savedRange = newRange.cloneRange();
+        autoSaveDraft();
+      } catch (err) {
+        targetNode.style.fontSize = newSize;
+        autoSaveDraft();
+      }
+    }
+
+    function applyFontFamily(fontClass) {
+      restoreSelection();
+      if (lastClickedElement) {
+        lastClickedElement.classList.remove('font-heiti', 'font-songti', 'font-kaiti');
+        lastClickedElement.classList.add(fontClass);
+        autoSaveDraft();
+      }
+    }
+
+    function applyLineHeight(lh) {
+      restoreSelection();
+      if (lastClickedElement) {
+        lastClickedElement.style.lineHeight = lh;
+        autoSaveDraft();
+      }
+    }
+
+    function applyAlignment(align) {
+      restoreSelection();
+      if (lastClickedElement) {
+        lastClickedElement.style.textAlign = align;
+        autoSaveDraft();
+      }
+    }
+
+    function applyTextColorDirect(color) {
+      restoreSelection();
+      document.execCommand('foreColor', false, color);
+      autoSaveDraft();
+    }
+
+    function applyBgColorDirect(color) {
+      if (!lastClickedElement) return alert("❌ 请先点击页面上要更改底色的卡片或按钮！");
+      lastClickedElement.className = lastClickedElement.className.replace(/bg-[a-zA-Z0-9]+-[0-9]+/g, '');
+      lastClickedElement.className = lastClickedElement.className.replace(/bg-gradient-to-[a-z]+/g, '');
+      lastClickedElement.style.backgroundImage = 'none';
+      lastClickedElement.style.backgroundColor = color;
+      autoSaveDraft();
+    }
+
+    function triggerImageUpload(event, inputEl) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          let container = inputEl.closest('.relative, .flex-col, div, section');
+          let targetImg = container ? container.querySelector('img') : null;
+          if (!targetImg && lastClickedElement) {
+            targetImg = lastClickedElement.tagName === 'IMG' ? lastClickedElement : lastClickedElement.querySelector('img');
+          }
+          if (targetImg) {
+            targetImg.src = e.target.result;
+            autoSaveDraft();
+            alert("🎉 图片已成功呈现！");
+          } else {
+            alert("未定位到对应图片区域，请重试。");
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Google Review 分页与分批 3 个 3 个加载引擎
+    function renderReviewPagination() {
+      const cards = document.querySelectorAll('#google-reviews-grid .review-card-item');
+      const loadBtn = document.getElementById('load-more-reviews-btn');
+      if (!cards.length) return;
+
+      cards.forEach((card, idx) => {
+        if (idx < visibleReviewCount) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (loadBtn) {
+        if (visibleReviewCount >= cards.length) {
+          loadBtn.innerHTML = '<span>▲ 已展示全部评价（点击收起）</span>';
+        } else {
+          loadBtn.innerHTML = '<span>👇 查看更多真实好评 (' + Math.min(cards.length, visibleReviewCount) + '/' + cards.length + ')</span>';
+        }
+      }
+    }
+
+    function loadMoreReviews() {
+      const cards = document.querySelectorAll('#google-reviews-grid .review-card-item');
+      if (visibleReviewCount >= cards.length) {
+        visibleReviewCount = 3;
+      } else {
+        visibleReviewCount += 3;
+      }
+      renderReviewPagination();
+    }
+
+    // 通用横向卡片移动 (左移/右移)
+    function moveCardHorizontally(btn, direction) {
+      const card = btn.closest('.group, .block-hover-zone, div');
+      if (!card || !card.parentElement) return;
+      if (direction === -1 && card.previousElementSibling) {
+        card.parentElement.insertBefore(card, card.previousElementSibling);
+      } else if (direction === 1 && card.nextElementSibling) {
+        card.parentElement.insertBefore(card.nextElementSibling, card);
+      }
+      autoSaveDraft();
+      renderReviewPagination();
+    }
+
+    // 通用纵向卡片移动 (上移/下移)
+    function moveCardVertically(btn, direction) {
+      const card = btn.closest('.faq-card-item, div');
+      if (!card || !card.parentElement) return;
+      if (direction === -1 && card.previousElementSibling) {
+        card.parentElement.insertBefore(card, card.previousElementSibling);
+      } else if (direction === 1 && card.nextElementSibling) {
+        card.parentElement.insertBefore(card.nextElementSibling, card);
+      }
+      autoSaveDraft();
+    }
+
+    function moveSlideItem(btn, direction) {
+      const slide = btn.closest('.testimonial-slide-item');
+      if (!slide || !slide.parentElement) return;
+      if (direction === -1 && slide.previousElementSibling) {
+        slide.parentElement.insertBefore(slide, slide.previousElementSibling);
+      } else if (direction === 1 && slide.nextElementSibling) {
+        slide.parentElement.insertBefore(slide.nextElementSibling, slide);
+      }
+      autoSaveDraft();
+    }
+
+    function addTableRow() {
+      let tbody = document.getElementById('schedule-body');
+      if (!tbody) {
+        const table = document.getElementById('schedule-table');
+        if (table) tbody = table.querySelector('tbody');
+      }
+      if (!tbody) return alert("未定位到时间表格。");
+
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-amber-50/40 transition';
+      tr.innerHTML = `
+        <td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">新排期课程项目</td>
+        <td class="p-3 sm:p-4 editable" contenteditable="true">待定时段</td>
+        <td class="p-3 sm:p-4 editable" contenteditable="true">待定老师</td>
+        <td class="p-2 sm:p-4 text-center"><span class="status-badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full font-medium editable" contenteditable="true">热招中</span></td>
+        <td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1">
+          <button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button>
+          <button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button>
+          <button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+      autoSaveDraft();
+    }
+
+    function addFaqItem() {
+      let container = document.getElementById('faq-container');
+      if (!container) {
+        const faqSection = document.getElementById('faq-section');
+        if (faqSection) container = faqSection.querySelector('.space-y-4');
+      }
+      if (!container) return alert("未定位到 FAQ 内容区。");
+
+      const div = document.createElement('div');
+      div.className = 'faq-card-item bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative group block-hover-zone hover-lift';
+      div.innerHTML = `
+        <div class="block-ctrl-bar absolute top-4 right-4 admin-only flex gap-1">
+          <button onclick="moveCardVertically(this, -1)" class="bg-slate-700 text-white text-xs px-1.5 py-0.5 rounded shadow">⬆</button>
+          <button onclick="moveCardVertically(this, 1)" class="bg-slate-700 text-white text-xs px-1.5 py-0.5 rounded shadow">⬇</button>
+          <button onclick="this.closest('.faq-card-item').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+        </div>
+        <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <i class="far fa-question-circle text-amber-500"></i>
+          <span class="editable" contenteditable="true">在此输入新的疑问标题？</span>
+        </h4>
+        <p class="text-slate-600 text-sm mt-3 leading-relaxed pl-6 editable" contenteditable="true">
+          在此输入详尽的解答内容。
+        </p>
+      `;
+      container.appendChild(div);
+      autoSaveDraft();
+    }
+
+    function addGoogleReviewCard() {
+      let grid = document.getElementById('google-reviews-grid');
+      if (!grid) {
+        const sec = document.getElementById('google-reviews-section');
+        if (sec) grid = sec.querySelector('.grid');
+      }
+      if (!grid) return;
+      const div = document.createElement('div');
+      div.className = 'review-card-item bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm block-hover-zone flex flex-col justify-between hover-lift relative group';
+      div.innerHTML = `
+        <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+          <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+          <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+          <button onclick="this.closest('.review-card-item').remove(); autoSaveDraft(); renderReviewPagination();" class="bg-rose-500 text-white text-xs px-1.5 py-0.5 rounded shadow">🗑️</button>
+        </div>
+        <div>
+          <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">
+            <i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i>
+          </div>
+          <p class="text-slate-700 text-xs sm:text-sm leading-relaxed editable" contenteditable="true">
+            “在此输入新的一条 Google 真实五星评价内容...”
+          </p>
+        </div>
+        <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+          <span class="font-bold text-xs text-slate-900 editable" contenteditable="true">家长 某某 (Google Review)</span>
+          <a href="https://maps.app.goo.gl/k1sz5K7BCeA8KJwE6" target="_blank" class="text-blue-600 hover:text-blue-700 font-black text-base" title="点击跳转至 Google 商家主页">
+            <i class="fab fa-google"></i>
+          </a>
+        </div>
+      `;
+      grid.appendChild(div);
+      autoSaveDraft();
+      renderReviewPagination();
+    }
+
+    function addBlogCard() {
+      let grid = document.getElementById('blog-cards-grid');
+      if (!grid) {
+        const sec = document.getElementById('blog-section');
+        if (sec) grid = sec.querySelector('.grid');
+      }
+      if (!grid) return;
+      const div = document.createElement('div');
+      div.className = 'bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col justify-between group block-hover-zone hover-lift';
+      div.innerHTML = `
+        <div class="block-ctrl-bar absolute top-2 right-2 z-10 admin-only flex gap-1">
+          <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+          <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+          <button onclick="cloneBlogCard(this)" class="bg-emerald-600 text-white text-xs px-2 py-0.5 rounded shadow">➕</button>
+          <button onclick="removeBlogCard(this)" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️</button>
+        </div>
+        <div>
+          <div class="aspect-[16/9] bg-slate-100 overflow-hidden relative">
+            <img src="blog.jpg" alt="新闻封面" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x338/f8fafc/94a3b8?text=上传配图';">
+            <label class="admin-only absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer">
+              📷 更换文章封面图
+              <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+            </label>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between text-xs text-amber-600 font-semibold mb-2">
+              <span class="editable" contenteditable="true">最新动态</span>
+              <span class="text-slate-400 editable" contenteditable="true">2026-09-14</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2 editable" contenteditable="true">在此输入新闻标题...</h3>
+            <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 editable" contenteditable="true">在此输入详细新闻摘要或报道内容...</p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-0">
+          <a href="https://wa.me/60146023321" target="_blank" class="editable-link text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1" contenteditable="true">
+            <span>阅读全文 / 咨询详情</span> <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      `;
+      grid.appendChild(div);
+      autoSaveDraft();
+    }
+    function cloneBlogCard(btn) {
+      const card = btn.closest('.group');
+      card.parentNode.insertBefore(card.cloneNode(true), card.nextSibling);
+      autoSaveDraft();
+    }
+    function removeBlogCard(btn) {
+      if (confirm("确认删除这篇文章吗？")) {
+        btn.closest('.group').remove();
+        autoSaveDraft();
+      }
+    }
+
+    function cloneCourseCard(btn) {
+      const card = btn.closest('.group');
+      card.parentNode.insertBefore(card.cloneNode(true), card.nextSibling);
+      autoSaveDraft();
+    }
+    function removeElement(btn) {
+      if (confirm("确认删除？")) {
+        btn.closest('.group').remove();
+        autoSaveDraft();
+      }
+    }
+    function cloneFeatureItem(btn) {
+      const item = btn.closest('.item-hover-zone');
+      item.parentNode.insertBefore(item.cloneNode(true), item.nextSibling);
+      autoSaveDraft();
+    }
+    function removeFeatureItem(btn) {
+      btn.closest('.item-hover-zone').remove();
+      autoSaveDraft();
+    }
+
+    function addNewMultiReviewCard(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const slider = document.getElementById('multi-testimonial-slider');
+          if (!slider) return alert("未找到好评墙轮播容器。");
+          const div = document.createElement('div');
+          div.className = 'testimonial-slide-item w-full md:w-1/3 flex-shrink-0 px-1 relative group';
+          div.innerHTML = `
+            <div class="admin-only absolute top-2 right-3 z-20 flex gap-1">
+              <button onclick="moveSlideItem(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+              <button onclick="moveSlideItem(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+              <button onclick="this.closest('.testimonial-slide-item').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-[9px] px-1 rounded shadow">🗑️</button>
+            </div>
+            <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 aspect-[4/3] flex items-center justify-center relative group">
+              <img src="${e.target.result}" alt="新增好评" class="w-full h-full object-cover">
+              <label class="admin-only absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer">
+                📷 替换图片
+                <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+              </label>
+            </div>
+          `;
+          slider.appendChild(div);
+          autoSaveDraft();
+          alert("🎉 成功新增一张好评截图到墙上！");
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    let multiSlideIndex = 0;
+    function nextMultiSlide() {
+      const slider = document.getElementById('multi-testimonial-slider');
+      if (!slider) return;
+      const total = slider.children.length;
+      const visibleCount = window.innerWidth >= 768 ? 3 : 1;
+      if (multiSlideIndex < total - visibleCount) multiSlideIndex++; else multiSlideIndex = 0;
+      slider.style.transform = `translateX(-${multiSlideIndex * (100 / visibleCount)}%)`;
+    }
+    function prevMultiSlide() {
+      const slider = document.getElementById('multi-testimonial-slider');
+      if (!slider) return;
+      const total = slider.children.length;
+      const visibleCount = window.innerWidth >= 768 ? 3 : 1;
+      if (multiSlideIndex > 0) multiSlideIndex--; else multiSlideIndex = Math.max(0, total - visibleCount);
+      slider.style.transform = `translateX(-${multiSlideIndex * (100 / visibleCount)}%)`;
+    }
+
+    function cloneHeroButton(btn) {
+      const wrapper = btn.closest('.group');
+      wrapper.parentNode.insertBefore(wrapper.cloneNode(true), wrapper.nextSibling);
+      autoSaveDraft();
+    }
+    function removeHeroButton(btn) {
+      const wrapper = btn.closest('.group');
+      if (document.querySelectorAll('#hero-buttons-container > div').length <= 1) {
+        return alert("请至少保留一个引导按钮！");
+      }
+      wrapper.remove();
+      autoSaveDraft();
+    }
+
+    function addTableColumn() {
+      const headTr = document.querySelector('#schedule-head tr');
+      if (!headTr) return;
+      const colName = prompt("请输入新列的标题名称：", "备注/学费");
+      if (!colName) return;
+
+      const newTh = document.createElement('th');
+      newTh.className = "p-3 sm:p-4 editable relative";
+      newTh.setAttribute('contenteditable', 'true');
+      newTh.style.width = "20%";
+      newTh.innerHTML = `${colName}<div class="resizer" onmousedown="initResize(event)"></div>`;
+      
+      const opTh = headTr.lastElementChild;
+      headTr.insertBefore(newTh, opTh);
+
+      const rows = document.querySelectorAll('#schedule-body tr');
+      rows.forEach(tr => {
+        const newTd = document.createElement('td');
+        newTd.className = "p-3 sm:p-4 editable";
+        newTd.setAttribute('contenteditable', 'true');
+        newTd.innerText = "内容";
+        const opTd = tr.lastElementChild;
+        tr.insertBefore(newTd, opTd);
+      });
+
+      initTableResizers();
+      autoSaveDraft();
+    }
+
+    function removeTableColumn() {
+      const headTr = document.querySelector('#schedule-head tr');
+      if (!headTr || headTr.children.length <= 3) return alert("至少需要保留核心列！");
+      const targetTh = headTr.children[headTr.children.length - 2];
+      const colIndex = Array.from(headTr.children).indexOf(targetTh);
+      targetTh.remove();
+
+      const rows = document.querySelectorAll('#schedule-body tr');
+      rows.forEach(tr => {
+        if (tr.children[colIndex]) tr.children[colIndex].remove();
+      });
+      autoSaveDraft();
+    }
+
+    function moveTableRow(btn, direction) {
+      const tr = btn.closest('tr');
+      if (direction === -1 && tr.previousElementSibling) {
+        tr.parentNode.insertBefore(tr, tr.previousElementSibling);
+      } else if (direction === 1 && tr.nextElementSibling) {
+        tr.parentNode.insertBefore(tr.nextElementSibling, tr);
+      }
+      autoSaveDraft();
+    }
+
+    function removeTableRow(btn) {
+      btn.closest('tr').remove();
+      autoSaveDraft();
+    }
+
+    function moveBlock(btn, direction) {
+      const block = btn.closest('.block-hover-zone');
+      if (direction === -1 && block.previousElementSibling) {
+        block.parentNode.insertBefore(block, block.previousElementSibling);
+      } else if (direction === 1 && block.nextElementSibling) {
+        block.parentNode.insertBefore(block.nextElementSibling, block);
+      }
+      autoSaveDraft();
+    }
+
+    function batchChangePhone() {
+      const newPhone = prompt("请输入新的 WhatsApp 电话号码（纯数字，带国码60）：", "60146023321");
+      if (!newPhone) return;
+      const clean = newPhone.replace(/[^0-9]/g, '');
+      document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+        let old = a.getAttribute('href');
+        a.setAttribute('href', old.replace(/wa\.me\/\d+/, `wa.me/${clean}`));
+      });
+      autoSaveDraft();
+      alert(`已统一更换 WhatsApp：${clean}`);
+    }
+
+    function processSmartAiInput() {
+      const text = document.getElementById('ai-input-text').value.trim();
+      if (!text) return alert("请先输入或粘贴需要补充的内容！");
+
+      const lines = text.split('\n');
+      let addedTimetable = 0;
+      let addedReviews = 0;
+      let addedBlogs = 0;
+
+      lines.forEach(line => {
+        line = line.trim();
+        if (!line) return;
+
+        if (line.includes('周') || line.includes('PM') || line.includes('AM') || line.includes('老师') || line.includes('班')) {
+          addTableRow();
+          const rows = document.querySelectorAll('#schedule-body tr');
+          const lastRow = rows[rows.length - 1];
+          if (lastRow) lastRow.children[1].innerText = line;
+          addedTimetable++;
+        } else if (line.includes('新闻') || line.includes('报道') || line.includes('动态') || line.includes('奖')) {
+          addBlogCard();
+          const blogs = document.querySelectorAll('#blog-cards-grid > div');
+          const lastBlog = blogs[blogs.length - 1];
+          if (lastBlog) {
+            const titleEl = lastBlog.querySelector('h3');
+            if (titleEl) titleEl.innerText = line;
+          }
+          addedBlogs++;
+        } else {
+          addGoogleReviewCard();
+          const reviews = document.querySelectorAll('#google-reviews-grid > div');
+          const lastRev = reviews[reviews.length - 1];
+          if (lastRev) {
+            const p = lastRev.querySelector('p');
+            if (p) p.innerText = `“${line}”`;
+          }
+          addedReviews++;
+        }
+      });
+
+      closeSmartAiModal();
+      document.getElementById('ai-input-text').value = '';
+      autoSaveDraft();
+      renderReviewPagination();
+      alert(`✨ 智能补充成功！新增了 ${addedTimetable} 条排期、${addedBlogs} 篇新闻动态及 ${addedReviews} 条好评！`);
+    }
+
+    function importAndMergeOldHtml(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const text = e.target.result;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+
+        const importedZone = doc.querySelector('#main-content-zone') || doc.body;
+        if (!importedZone) return alert("❌ 无法解析该文件结构。");
+
+        importedZone.querySelectorAll('.admin-only, .resizer, #admin-topbar, #custom-context-menu').forEach(el => el.remove());
+
+        // 1. 深度解决【独家模块】文字导入
+        const oldExcl = importedZone.querySelector('#exclusive-section') || importedZone.querySelector('section:has(img[src*="badge"])') || importedZone.querySelector('.bg-gradient-to-r');
+        const curExcl = document.getElementById('exclusive-section');
+        if (oldExcl && curExcl) {
+          const oldH3 = oldExcl.querySelector('h3');
+          const oldP = oldExcl.querySelector('p');
+          if (oldH3 && curExcl.querySelector('h3')) curExcl.querySelector('h3').innerText = oldH3.innerText.trim();
+          if (oldP && curExcl.querySelector('p')) curExcl.querySelector('p').innerText = oldP.innerText.trim();
+        }
+
+        // 2. 深度解决【四大核心课程】及内部特点列表
+        const oldCoursesSec = importedZone.querySelector('#courses-section');
+        const curCoursesContainer = document.getElementById('courses-cards-container');
+        if (oldCoursesSec && curCoursesContainer) {
+          const oldCards = oldCoursesSec.querySelectorAll('#courses-cards-container > div, .grid > div');
+          const curCards = curCoursesContainer.children;
+          oldCards.forEach((oldCard, i) => {
+            if (curCards[i]) {
+              const oldH3 = oldCard.querySelector('h3');
+              const oldSub = oldCard.querySelector('p');
+              const oldTag = oldCard.querySelector('span.text-xs');
+              if (oldH3 && curCards[i].querySelector('h3')) curCards[i].querySelector('h3').innerText = oldH3.innerText.trim();
+              if (oldSub && curCards[i].querySelector('p')) curCards[i].querySelector('p').innerText = oldSub.innerText.trim();
+              if (oldTag && curCards[i].querySelector('span.text-xs')) curCards[i].querySelector('span.text-xs').innerText = oldTag.innerText.trim();
+
+              const oldLis = oldCard.querySelectorAll('li span.editable');
+              const curLis = curCards[i].querySelectorAll('li span.editable');
+              oldLis.forEach((oldLi, liIdx) => {
+                if (curLis[liIdx]) curLis[liIdx].innerText = oldLi.innerText.trim();
+              });
+            }
+          });
+        }
+
+        // 3. 恢复时间表（整表结构化嫁接）
+        const oldTableBody = importedZone.querySelector('#schedule-body') || importedZone.querySelector('tbody');
+        const curTableBody = document.getElementById('schedule-body');
+        if (oldTableBody && curTableBody) {
+          curTableBody.innerHTML = '';
+          Array.from(oldTableBody.children).forEach(oldTr => {
+            const tds = oldTr.querySelectorAll('td');
+            if (tds.length >= 4) {
+              const tr = document.createElement('tr');
+              tr.className = 'hover:bg-amber-50/40 transition';
+              tr.innerHTML = `
+                <td class="p-3 sm:p-4 font-bold text-slate-900 editable" contenteditable="true">${tds[0].innerText.trim()}</td>
+                <td class="p-3 sm:p-4 editable" contenteditable="true">${tds[1].innerText.trim()}</td>
+                <td class="p-3 sm:p-4 editable" contenteditable="true">${tds[2].innerText.trim()}</td>
+                <td class="p-2 sm:p-4 text-center"><span class="status-badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">${tds[3].innerText.trim()}</span></td>
+                <td class="p-2 sm:p-4 text-center admin-only flex items-center justify-center gap-1">
+                  <button onclick="moveTableRow(this, -1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬆</button>
+                  <button onclick="moveTableRow(this, 1)" class="bg-slate-200 px-1 rounded text-xs font-bold">⬇</button>
+                  <button onclick="removeTableRow(this)" class="text-rose-500 font-bold text-xs ml-1">🗑️</button>
+                </td>
+              `;
+              curTableBody.appendChild(tr);
+            }
+          });
+        }
+
+        // 4. 恢复 Google Reviews
+        const oldRevGrid = importedZone.querySelector('#google-reviews-grid') || importedZone.querySelector('#google-reviews-section .grid');
+        if (oldRevGrid) {
+          const curRevGrid = document.getElementById('google-reviews-grid');
+          if (curRevGrid) {
+            curRevGrid.innerHTML = '';
+            Array.from(oldRevGrid.children).forEach(card => {
+              const textP = card.querySelector('p');
+              const authorSpan = card.querySelector('span');
+              if (textP) {
+                const div = document.createElement('div');
+                div.className = 'review-card-item bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm block-hover-zone flex flex-col justify-between hover-lift relative group';
+                div.innerHTML = `
+                  <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+                    <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+                    <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+                    <button onclick="this.closest('.review-card-item').remove(); autoSaveDraft(); renderReviewPagination();" class="bg-rose-500 text-white text-xs px-1.5 py-0.5 rounded shadow">🗑️</button>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">
+                      <i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i>
+                    </div>
+                    <p class="text-slate-700 text-xs sm:text-sm leading-relaxed editable" contenteditable="true">${textP.innerText.trim()}</p>
+                  </div>
+                  <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+                    <span class="font-bold text-xs text-slate-900 editable" contenteditable="true">${authorSpan ? authorSpan.innerText.trim() : 'Google Review'}</span>
+                    <a href="https://maps.app.goo.gl/k1sz5K7BCeA8KJwE6" target="_blank" class="text-blue-600 hover:text-blue-700 font-black text-base">
+                      <i class="fab fa-google"></i>
+                    </a>
+                  </div>
+                `;
+                curRevGrid.appendChild(div);
+              }
+            });
+          }
+        }
+
+        // 5. 恢复 FAQ
+        const oldFaqBox = importedZone.querySelector('#faq-container') || importedZone.querySelector('#faq-section .space-y-4');
+        if (oldFaqBox) {
+          const curFaqBox = document.getElementById('faq-container');
+          if (curFaqBox) {
+            curFaqBox.innerHTML = '';
+            Array.from(oldFaqBox.children).forEach(faqItem => {
+              const h4 = faqItem.querySelector('h4');
+              const p = faqItem.querySelector('p');
+              if (h4 && p) {
+                const div = document.createElement('div');
+                div.className = 'faq-card-item bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative group block-hover-zone hover-lift';
+                div.innerHTML = `
+                  <div class="block-ctrl-bar absolute top-4 right-4 admin-only flex gap-1">
+                    <button onclick="moveCardVertically(this, -1)" class="bg-slate-700 text-white text-xs px-1.5 py-0.5 rounded shadow">⬆</button>
+                    <button onclick="moveCardVertically(this, 1)" class="bg-slate-700 text-white text-xs px-1.5 py-0.5 rounded shadow">⬇</button>
+                    <button onclick="this.closest('.faq-card-item').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="far fa-question-circle text-amber-500"></i>
+                    <span class="editable" contenteditable="true">${h4.innerText.trim()}</span>
+                  </h4>
+                  <p class="text-slate-600 text-sm mt-3 leading-relaxed pl-6 editable" contenteditable="true">${p.innerText.trim()}</p>
+                `;
+                curFaqBox.appendChild(div);
+              }
+            });
+          }
+        }
+
+        // 6. 恢复名师与成就
+        ['teacher-section', 'achievement-section'].forEach(secId => {
+          const oldSec = importedZone.querySelector(`#${secId}`);
+          const curSec = document.getElementById(secId);
+          if (oldSec && curSec) {
+            const oldTexts = Array.from(oldSec.querySelectorAll('h1, h2, h3, h4, p, span.counter')).map(el => el.innerText.trim()).filter(t => t.length > 0);
+            const curEditables = curSec.querySelectorAll('h1, h2, h3, h4, p, span.counter');
+            let idx = 0;
+            curEditables.forEach(el => {
+              if (oldTexts[idx]) {
+                el.innerText = oldTexts[idx];
+                if (el.classList.contains('counter')) syncCounterTarget(el);
+                idx++;
+              }
+            });
+          }
+        });
+
+        autoSaveDraft();
+        renderReviewPagination();
+        alert("🎉 智能融合成功！四大课程、独家模块、时间表及全部好评卡片均已完整导入！");
+      };
+      reader.readAsText(file);
+    }
+
+    function exportAdminPrototype() {
+      const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = "admin.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      alert("🛠️ 当前最新版本的 admin.html 原型分身备份成功！");
+    }
+
+    function exportProductionIndex() {
+      const clone = document.documentElement.cloneNode(true);
+      
+      const titleTag = clone.querySelector('title');
+      if (titleTag) {
+        titleTag.innerText = "Lim Mandarin Academy | 马来西亚专业华文教学 · 中小学应试冲刺与思维升华";
+      }
+
+      const head = clone.querySelector('head');
+      if (head) {
+        const ogTitle = document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        ogTitle.content = "Lim Mandarin Academy | 马来西亚专业华文教学与应试专家";
+        head.appendChild(ogTitle);
+
+        const ogDesc = document.createElement('meta');
+        ogDesc.setAttribute('property', 'og:description');
+        ogDesc.content = "深耕华小、国中、华中考制与思辨训练。独创六步节奏与全线上互动课堂，助学子决胜华文！";
+        head.appendChild(ogDesc);
+      }
+
+      const topBar = clone.querySelector('#admin-topbar');
+      if (topBar) topBar.remove();
+
+      const contextMenu = clone.querySelector('#custom-context-menu');
+      if (contextMenu) contextMenu.remove();
+
+      const aiModal = clone.querySelector('#smart-ai-modal');
+      if (aiModal) aiModal.remove();
+
+      clone.querySelectorAll('.admin-only').forEach(el => el.remove());
+      clone.querySelectorAll('.resizer').forEach(el => el.remove());
+      clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      clone.querySelectorAll('.editable').forEach(el => el.classList.remove('editable'));
+      clone.querySelectorAll('.editable-link').forEach(el => el.removeAttribute('title'));
+
+      const scripts = clone.querySelectorAll('script');
+      scripts.forEach(s => {
+        if (s.innerHTML.includes('exportProductionIndex') || s.innerHTML.includes('admin-topbar') || s.innerHTML.includes('STORAGE_KEY')) {
+          s.remove();
+        }
+      });
+
+      const waFloat = document.createElement('a');
+      waFloat.href = "https://wa.me/60146023321?text=你好林老师，我想咨询2027年华文补习课程";
+      waFloat.target = "_blank";
+      waFloat.className = "fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white p-3.5 sm:p-4 rounded-full shadow-2xl transition transform hover:scale-105 flex items-center gap-2 lock-nowrap";
+      waFloat.innerHTML = '<i class="fab fa-whatsapp text-2xl"></i><span class="hidden sm:inline text-xs font-bold pr-1">立即咨询</span>';
+      clone.querySelector('body').appendChild(waFloat);
+
+      const prodEngine = document.createElement('script');
+      prodEngine.innerHTML = `
+        document.addEventListener('DOMContentLoaded', () => {
+          const counters = document.querySelectorAll('.counter');
+          const speed = 60;
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = +counter.getAttribute('data-target') || parseInt(counter.innerText) || 100;
+                let count = 0;
+                const inc = Math.max(1, target / speed);
+                const updateCount = () => {
+                  count += inc;
+                  if (count < target) {
+                    counter.innerText = Math.ceil(count);
+                    setTimeout(updateCount, 25);
+                  } else {
+                    counter.innerText = target;
+                  }
+                };
+                updateCount();
+                obs.unobserve(counter);
+              }
+            });
+          }, { threshold: 0.3 });
+          counters.forEach(c => observer.observe(c));
+
+          let slideIdx = 0;
+          window.nextMultiSlide = function() {
+            const slider = document.getElementById('multi-testimonial-slider');
+            if (!slider) return;
+            const total = slider.children.length;
+            const visible = window.innerWidth >= 768 ? 3 : 1;
+            if (slideIdx < total - visible) slideIdx++; else slideIdx = 0;
+            slider.style.transform = 'translateX(-' + (slideIdx * (100 / visible)) + '%)';
+          };
+          window.prevMultiSlide = function() {
+            const slider = document.getElementById('multi-testimonial-slider');
+            if (!slider) return;
+            const total = slider.children.length;
+            const visible = window.innerWidth >= 768 ? 3 : 1;
+            if (slideIdx > 0) slideIdx--; else slideIdx = Math.max(0, total - visible);
+            slider.style.transform = 'translateX(-' + (slideIdx * (100 / visible)) + '%)';
+          };
+
+          // Google Review 纯净版分页
+          let reviewCount = 3;
+          function syncProdReviews() {
+            const cards = document.querySelectorAll('#google-reviews-grid .review-card-item');
+            const btn = document.getElementById('load-more-reviews-btn');
+            cards.forEach((c, idx) => {
+              c.style.display = idx < reviewCount ? 'flex' : 'none';
+            });
+            if (btn) {
+              if (reviewCount >= cards.length) {
+                btn.innerHTML = '<span>▲ 已展示全部评价（点击收起）</span>';
+              } else {
+                btn.innerHTML = '<span>👇 查看更多真实好评</span>';
+              }
+            }
+          }
+          window.loadMoreReviews = function() {
+            const cards = document.querySelectorAll('#google-reviews-grid .review-card-item');
+            if (reviewCount >= cards.length) reviewCount = 3; else reviewCount += 3;
+            syncProdReviews();
+          };
+          syncProdReviews();
+        });
+        function toggleMobileMenu() {
+          const menu = document.getElementById('mobile-dropdown-menu');
+          if (menu) menu.classList.toggle('hidden');
+        }
+      `;
+      clone.querySelector('body').appendChild(prodEngine);
+
+      const prodStyle = document.createElement('style');
+      prodStyle.innerHTML = `
+        html { scroll-behavior: smooth; }
+        .brand-title, .lock-nowrap { white-space: nowrap !important; word-break: keep-all !important; }
+        @media (max-width: 640px) {
+          .brand-title { font-size: 16px !important; line-height: 1.2 !important; }
+          .hero-main-title { font-size: clamp(22px, 6vw, 28px) !important; }
+          .hero-sub-title { font-size: clamp(18px, 5vw, 22px) !important; }
+          .mobile-safe-flex { flex-wrap: nowrap !important; overflow-x: auto; }
+        }
+        @media (max-width: 767px) {
+          .compact-mobile-table { table-layout: fixed !important; width: 100% !important; }
+          .compact-mobile-table th, .compact-mobile-table td { padding: 8px 4px !important; font-size: 11px !important; line-height: 1.3 !important; word-break: break-word !important; }
+          .compact-mobile-table .status-badge { font-size: 9px !important; padding: 2px 4px !important; }
+        }
+      `;
+      clone.querySelector('head').appendChild(prodStyle);
+
+      const cleanHtml = "<!DOCTYPE html>\n" + clone.outerHTML;
+      const blob = new Blob([cleanHtml], { type: "text/html;charset=utf-8" });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = "index.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      alert("🎉 导出成功！\n已生成标题正规、具备数字狂飙动画、手机端无缝紧凑排版且发到社交软件绝无 Admin 感觉的 index.html！");
+    }
+
+    function executeMenuAction(actionFn) {
+      if (typeof actionFn === 'function') {
+        actionFn();
+      }
+      const menu = document.getElementById('custom-context-menu');
+      if (menu) menu.style.display = 'none';
+    }
+
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target.closest('a') && e.altKey) return;
+      e.preventDefault();
+      
+      activeRightClickTarget = e.target;
+      rightClickedElement = e.target.closest('.block-hover-zone') || document.getElementById('main-content-zone');
+      
+      const menu = document.getElementById('custom-context-menu');
+      const label = document.getElementById('link-target-type-label');
+      
+      if (e.target.tagName === 'IMG') {
+        label.innerText = "当前选中【图片/徽章】绑定超链接：";
+      } else {
+        label.innerText = "选中文本/区域绑定超链接：";
+      }
+
+      menu.style.left = `${Math.min(e.clientX, window.innerWidth - 330)}px`;
+      menu.style.top = `${Math.min(e.clientY, window.innerHeight - 550)}px`;
+      menu.style.display = 'block';
+    });
+
+    document.getElementById('custom-context-menu').addEventListener('mousedown', (e) => {
+      e.stopPropagation();
+    });
+
+    document.addEventListener('mousedown', (e) => {
+      const menu = document.getElementById('custom-context-menu');
+      if (menu && !e.target.closest('#custom-context-menu')) {
+        menu.style.display = 'none';
+      }
+      if(!e.target.closest('#admin-topbar') && !e.target.closest('#custom-context-menu') && !e.target.closest('#smart-ai-modal')) {
+        lastClickedElement = e.target.closest('div, section, a.editable-link, li, th, td, span.status-badge, p, h1, h2, h3, h4, img');
+        if (!lastClickedElement) lastClickedElement = e.target;
+      }
+    });
+
+    function linkCurrentTargetTo(targetUrl) {
+      if (targetUrl === 'custom') {
+        targetUrl = prompt("请输入要跳转的目标网址 (URL) 或 WhatsApp 链接：", "https://");
+        if (!targetUrl) return;
+      }
+
+      if (activeRightClickTarget && activeRightClickTarget.tagName === 'IMG') {
+        let parentA = activeRightClickTarget.closest('a');
+        if (parentA) {
+          parentA.href = targetUrl;
+        } else {
+          const a = document.createElement('a');
+          a.href = targetUrl;
+          a.target = targetUrl.startsWith('#') ? '_self' : '_blank';
+          a.className = "inline-block cursor-pointer";
+          activeRightClickTarget.parentNode.insertBefore(a, activeRightClickTarget);
+          a.appendChild(activeRightClickTarget);
+        }
+        autoSaveDraft();
+        alert("🎉 成功为该图片/VIP图标绑定跳转链接！");
+        return;
+      }
+
+      restoreSelection();
+      if (!savedRange) {
+        if (lastClickedElement && lastClickedElement.tagName === 'A') {
+          lastClickedElement.href = targetUrl;
+          autoSaveDraft();
+          alert("✅ 链接修改成功！");
+        }
+        return;
+      }
+
+      const a = document.createElement('a');
+      a.href = targetUrl;
+      a.className = "text-amber-600 underline font-medium editable-link editable";
+      a.setAttribute('contenteditable', 'true');
+      a.target = targetUrl.startsWith('#') ? '_self' : '_blank';
+      a.title = "按住 Alt 点击修改链接";
+
+      try {
+        const content = savedRange.extractContents();
+        a.appendChild(content);
+        savedRange.insertNode(a);
+        autoSaveDraft();
+        alert("🎉 成功为选中文本绑定超链接！");
+      } catch (err) {
+        alert("绑定失败，请在同一个可编辑文本框内选取文字。");
+      }
+    }
+
+    function removeCurrentTargetLink() {
+      if (activeRightClickTarget && activeRightClickTarget.tagName === 'IMG') {
+        let parentA = activeRightClickTarget.closest('a');
+        if (parentA) {
+          parentA.parentNode.insertBefore(activeRightClickTarget, parentA);
+          parentA.remove();
+          autoSaveDraft();
+          alert("已移除图片跳转链接。");
+        }
+        return;
+      }
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return;
+      let node = sel.anchorNode;
+      let aTag = node ? node.parentElement.closest('a') : null;
+      if (aTag) {
+        let parent = aTag.parentNode;
+        while (aTag.firstChild) parent.insertBefore(aTag.firstChild, aTag);
+        aTag.remove();
+        autoSaveDraft();
+        alert("已成功移除超链接。");
+      }
+    }
+
+    function insertBlockFromMenu(type) {
+      if (!rightClickedElement) {
+        rightClickedElement = document.getElementById('main-content-zone');
+      }
+
+      let newHtml = "";
+
+      if (type === 'highlight-badge') {
+        newHtml = `
+          <section id="exclusive-section" class="py-8 max-w-4xl mx-auto px-4 block-hover-zone text-center">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 rounded-3xl p-6 sm:p-8 text-white shadow-xl hover-lift block-hover-zone relative overflow-hidden">
+              <div class="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 text-center sm:text-left">
+                  <span class="bg-white/20 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest editable" contenteditable="true">🔥 独家王牌优势</span>
+                  <h3 class="text-xl sm:text-2xl font-black tracking-tight editable" contenteditable="true">独家精锐作文批改团队 · 逐字精批</h3>
+                  <p class="text-white/90 text-xs sm:text-sm max-w-xl editable" contenteditable="true">每个字眼、每个立意均由资深华文名师亲自精细拆解，直击 SPM 采分盲点！</p>
+                </div>
+                <div class="flex-shrink-0 flex flex-col items-center">
+                  <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-white/20 border-2 border-white/40 flex items-center justify-center shadow-md">
+                    <img src="badge.jpg" alt="王牌图标" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/200x200/ffffff/d97706?text=VIP';">
+                  </div>
+                  <label class="admin-only bg-white/30 hover:bg-white/40 text-white text-[9px] px-2 py-0.5 rounded mt-1 inline-block cursor-pointer">
+                    换图
+                    <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'blog') {
+        newHtml = `
+          <section id="blog-section" class="py-14 max-w-6xl mx-auto px-4 block-hover-zone">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="text-center mb-10">
+              <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">LMA News & Media</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">最新动态与独家新闻报道</h2>
+              <div class="flex justify-end mt-4 admin-only">
+                <button onclick="addBlogCard()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
+                  <i class="fas fa-plus-circle text-sm"></i> ➕ 新增一篇新闻/Blog文章
+                </button>
+              </div>
+            </div>
+            <div id="blog-cards-grid" class="grid md:grid-cols-3 gap-6">
+              <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col justify-between group block-hover-zone hover-lift">
+                <div class="block-ctrl-bar absolute top-2 right-2 z-10 admin-only flex gap-1">
+                  <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+                  <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+                  <button onclick="cloneBlogCard(this)" class="bg-emerald-600 text-white text-xs px-2 py-0.5 rounded shadow">➕</button>
+                  <button onclick="removeBlogCard(this)" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️</button>
+                </div>
+                <div>
+                  <div class="aspect-[16/9] bg-slate-100 overflow-hidden relative">
+                    <img src="blog.jpg" alt="新闻封面" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x338/f8fafc/94a3b8?text=上传配图';">
+                    <label class="admin-only absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer">
+                      📷 更换文章封面图
+                      <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+                    </label>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex items-center justify-between text-xs text-amber-600 font-semibold mb-2">
+                      <span class="editable" contenteditable="true">最新动态</span>
+                      <span class="text-slate-400 editable" contenteditable="true">2026-09-14</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 editable" contenteditable="true">新发布的独家教学成果</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 editable" contenteditable="true">在此输入详细新闻摘要或报道内容...</p>
+                  </div>
+                </div>
+                <div class="px-6 pb-6 pt-0">
+                  <a href="https://wa.me/60146023321" target="_blank" class="editable-link text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1" contenteditable="true">
+                    <span>阅读全文 / 咨询详情</span> <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'cta') {
+        newHtml = `
+          <section class="py-8 max-w-4xl mx-auto px-4 text-center block-hover-zone">
+            <div class="block-ctrl-bar absolute top-2 right-6 flex gap-1 z-20 admin-only">
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="bg-slate-900 text-white p-8 rounded-3xl shadow-md space-y-4 block-hover-zone hover-lift">
+              <h3 class="text-2xl font-bold editable" contenteditable="true">准备好开启华文突破之旅了吗？</h3>
+              <a href="https://wa.me/60146023321" target="_blank" class="editable-link inline-flex items-center gap-2 bg-emerald-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg lock-nowrap editable" contenteditable="true">
+                <i class="fab fa-whatsapp" contenteditable="false"></i>即刻 WhatsApp 预约
+              </a>
+            </div>
+          </section>
+        `;
+      } else if (type === 'google-reviews') {
+        newHtml = `
+          <section id="google-reviews-section" class="py-14 bg-white border-y border-slate-100 px-4 block-hover-zone">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="max-w-6xl mx-auto text-center">
+              <div class="inline-flex items-center gap-2 bg-red-50 text-red-600 text-xs font-semibold px-3 py-1 rounded-full border border-red-200 mb-3">
+                <i class="fab fa-google" contenteditable="false"></i>
+                <span class="editable" contenteditable="true">Google Business Verified Reviews</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 editable" contenteditable="true">来自 Google 用户的五星真实好评</h2>
+              <div class="flex justify-end mt-4 mb-2 admin-only">
+                <button onclick="addGoogleReviewCard()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
+                  <i class="fas fa-plus-circle text-sm"></i> ➕ 新增一个 Google 好评卡片
+                </button>
+              </div>
+              <div id="google-reviews-grid" class="grid md:grid-cols-3 gap-6 mt-4 text-left">
+                <div class="review-card-item bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm block-hover-zone flex flex-col justify-between hover-lift relative group">
+                  <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+                    <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+                    <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+                    <button onclick="this.closest('.review-card-item').remove(); autoSaveDraft(); renderReviewPagination();" class="bg-rose-500 text-white text-xs px-1.5 py-0.5 rounded shadow">🗑️</button>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">
+                      <i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i><i class="fas fa-star" contenteditable="false"></i>
+                    </div>
+                    <p class="text-slate-700 text-xs sm:text-sm leading-relaxed editable" contenteditable="true">“林老师讲课幽默风趣，孩子成绩突飞猛进！”</p>
+                  </div>
+                  <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+                    <span class="font-bold text-xs text-slate-900 editable" contenteditable="true">家长 陈女士 (Google Review)</span>
+                    <a href="https://maps.app.goo.gl/k1sz5K7BCeA8KJwE6" target="_blank" class="text-blue-600 hover:text-blue-700 font-black text-base">
+                      <i class="fab fa-google"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 flex justify-center gap-3">
+                <button id="load-more-reviews-btn" onclick="loadMoreReviews()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-6 py-2.5 rounded-full shadow transition flex items-center gap-1.5">
+                  <span>👇 查看更多真实好评</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'achievement') {
+        newHtml = `
+          <section id="achievement-section" class="py-14 bg-gradient-to-br from-amber-50 to-orange-100 px-4 block-hover-zone border-y border-amber-200">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="max-w-6xl mx-auto text-center">
+              <span class="text-xs font-semibold bg-amber-200 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Proven Track Record</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">LMA 历年教学坚实成就</h2>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+                <div class="bg-white/90 backdrop-blur border border-amber-200 p-6 rounded-2xl shadow-lg hover:shadow-xl transition block-hover-zone hover-lift relative group">
+                  <div class="block-ctrl-bar absolute top-2 right-2 admin-only flex gap-1">
+                    <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+                    <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+                  </div>
+                  <div class="text-3xl sm:text-4xl font-black text-amber-600 font-mono mb-1"><span class="counter font-bold" data-target="300" onblur="syncCounterTarget(this)">300</span>+</div>
+                  <div class="text-xs sm:text-sm text-slate-700 font-bold editable" contenteditable="true">培养学生总数</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'courses') {
+        newHtml = `
+          <section id="courses-section" class="py-16 max-w-6xl mx-auto px-4 block-hover-zone">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="text-center max-w-2xl mx-auto mb-12">
+              <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Curriculum Matrix</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">核心课程矩阵</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="courses-cards-container">
+              <div class="block-hover-zone bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover-lift relative group">
+                <div class="block-ctrl-bar absolute -top-3.5 right-4 flex gap-1 z-20 admin-only">
+                  <button onclick="moveCardHorizontally(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+                  <button onclick="moveCardHorizontally(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+                  <button onclick="cloneCourseCard(this)" class="bg-emerald-600 text-white text-xs px-2 py-0.5 rounded shadow font-bold">➕</button>
+                  <button onclick="removeElement(this)" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️</button>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 editable" contenteditable="true">新课程项目</h3>
+                <p class="text-xs text-slate-500 mt-1 editable" contenteditable="true">在此输入课程特色说明...</p>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'timetable') {
+        newHtml = `
+          <section id="timetable-section" class="py-14 bg-slate-100 px-3 sm:px-4 block-hover-zone">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="max-w-5xl mx-auto">
+              <div class="text-center mb-6">
+                <span class="text-xs font-semibold bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Timetable & Planning</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">2027 新学年上课时间表</h2>
+              </div>
+              <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <table class="compact-mobile-table w-full text-left text-sm border-collapse" style="table-layout: fixed;">
+                  <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 text-xs uppercase font-semibold">
+                    <tr>
+                      <th class="p-3 sm:p-4 editable relative" contenteditable="true" style="width:32%">课程项目</th>
+                      <th class="p-3 sm:p-4 editable relative" contenteditable="true" style="width:32%">上课时段</th>
+                      <th class="p-3 sm:p-4 editable relative" contenteditable="true" style="width:22%">老师/备注</th>
+                      <th class="p-2 sm:p-4 text-center editable relative" contenteditable="true" style="width:14%">状态</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="p-3 sm:p-4 font-bold editable" contenteditable="true">六年级华语</td>
+                      <td class="p-3 sm:p-4 editable" contenteditable="true">周六下午</td>
+                      <td class="p-3 sm:p-4 editable" contenteditable="true">林老师</td>
+                      <td class="p-2 sm:p-4 text-center"><span class="status-badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full editable" contenteditable="true">热招中</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'testimonials') {
+        newHtml = `
+          <section id="testimonials-section" class="py-14 max-w-6xl mx-auto px-4 block-hover-zone">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="text-center mb-8">
+              <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full uppercase tracking-wider editable" contenteditable="true">Student & Parent Testimonials</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-3 editable" contenteditable="true">学员与家长真实好评墙</h2>
+            </div>
+            <div class="relative bg-white p-6 rounded-3xl border border-slate-200 shadow-sm max-w-5xl mx-auto overflow-hidden">
+              <div id="multi-testimonial-slider" class="flex transition-transform duration-500 ease-in-out gap-4">
+                <div class="testimonial-slide-item w-full md:w-1/3 flex-shrink-0 px-1 relative group">
+                  <div class="admin-only absolute top-2 right-3 z-20 flex gap-1">
+                    <button onclick="moveSlideItem(this, -1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">⬅️</button>
+                    <button onclick="moveSlideItem(this, 1)" class="bg-slate-700 text-white text-[9px] px-1 rounded shadow">➡️</button>
+                    <button onclick="this.closest('.testimonial-slide-item').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-[9px] px-1 rounded shadow">🗑️</button>
+                  </div>
+                  <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 aspect-[4/3] flex items-center justify-center relative group">
+                    <img src="review1.jpg" alt="好评 1" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x450/f8fafc/94a3b8?text=请放入+review1.jpg';">
+                    <label class="admin-only absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer">
+                      📷 替换图片
+                      <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'teacher') {
+        newHtml = `
+          <section id="teacher-section" class="py-12 max-w-5xl mx-auto px-4 block-hover-zone">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2.5 py-1 rounded shadow">🗑️ 删除老师</button>
+            </div>
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-6 sm:gap-8 block-hover-zone hover-lift">
+              <div class="flex flex-col items-center gap-2 flex-shrink-0">
+                <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-2xl overflow-hidden shadow-md bg-slate-100 border border-slate-200 flex items-center justify-center">
+                  <img src="teacher.jpg" alt="主讲名师" class="teacher-img w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x400';">
+                </div>
+                <label class="admin-only bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] px-2.5 py-1 rounded border border-slate-300 cursor-pointer">
+                  换照片预览
+                  <input type="file" accept="image/*" onchange="triggerImageUpload(event, this)" class="hidden">
+                </label>
+              </div>
+              <div class="space-y-3 text-left flex-1">
+                <div class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full editable" contenteditable="true">主讲名师 / 教学指导</div>
+                <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 editable" contenteditable="true">老师姓名</h3>
+                <p class="text-amber-700 font-medium text-xs sm:text-sm editable" contenteditable="true">专业资历与教学亮点</p>
+                <p class="text-slate-600 text-sm leading-relaxed editable" contenteditable="true">在此输入老师的深度介绍，点击文字直接修改。</p>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'faq') {
+        newHtml = `
+          <section id="faq-section" class="py-14 bg-slate-100 px-4 block-hover-zone">
+            <div class="block-ctrl-bar absolute top-2 right-4 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded shadow">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="max-w-4xl mx-auto">
+              <h2 class="text-2xl font-bold text-slate-900 text-center mb-6 editable" contenteditable="true">常见问题 FAQ</h2>
+              <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm block-hover-zone hover-lift">
+                <h4 class="font-bold text-slate-900 editable" contenteditable="true">请假可以补课吗？</h4>
+                <p class="text-slate-600 text-sm mt-2 editable" contenteditable="true">提供高清课堂回放视频。</p>
+              </div>
+            </div>
+          </section>
+        `;
+      } else if (type === 'video') {
+        newHtml = `
+          <section class="py-10 max-w-4xl mx-auto px-4 block-hover-zone text-center">
+            <div class="block-ctrl-bar absolute top-2 right-6 flex gap-1 z-20 admin-only">
+              <button onclick="moveBlock(this, -1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded">⬆ 上移</button>
+              <button onclick="moveBlock(this, 1)" class="bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-0.5 rounded">⬇ 下移</button>
+              <button onclick="this.closest('section').remove(); autoSaveDraft();" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded shadow">🗑️ 删除</button>
+            </div>
+            <div class="video-responsive shadow-xl border-4 border-white bg-slate-900">
+              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+          </section>
+        `;
+      }
+
+      if (newHtml) {
+        const temp = document.createElement('div');
+        temp.innerHTML = newHtml;
+        if (rightClickedElement && rightClickedElement.parentNode) {
+          rightClickedElement.parentNode.insertBefore(temp.firstElementChild, rightClickedElement.nextSibling);
+        } else {
+          document.getElementById('main-content-zone').appendChild(temp.firstElementChild);
+        }
+        autoSaveDraft();
+        renderReviewPagination();
+        alert("🎉 模块插入成功！");
+      }
+    }
+
+    function autoSaveDraft() {
+      const zone = document.getElementById('main-content-zone');
+      if (zone) {
+        localStorage.setItem(STORAGE_KEY, zone.innerHTML);
+        const tag = document.getElementById('save-status-tag');
+        if (tag) tag.innerHTML = '<i class="fas fa-check-circle"></i> 自动存盘正常';
+      }
+    }
+
+    function loadSavedDraft() {
+      const savedHtml = localStorage.getItem(STORAGE_KEY);
+      if (savedHtml && savedHtml.trim().length > 200) {
+        document.getElementById('main-content-zone').innerHTML = savedHtml;
+      }
+      initCounters();
+      initTableResizers();
+      renderReviewPagination();
+    }
+
+    function resetToDefaultLayout() {
+      if (confirm("确定要清空错位缓存，恢复标准锁死版吗？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        window.location.reload();
+      }
+    }
+
+    function initTableResizers() {
+      const table = document.getElementById('schedule-table');
+      if (!table) return;
+      const cols = table.querySelectorAll('th');
+      cols.forEach((th) => {
+        const resizer = th.querySelector('.resizer');
+        if (!resizer) return;
+        let x = 0;
+        let w = 0;
+        const mouseMoveHandler = function (e) {
+          const dx = e.clientX - x;
+          th.style.width = `${w + dx}px`;
+        };
+        const mouseUpHandler = function () {
+          document.removeEventListener('mousemove', mouseMoveHandler);
+          document.removeEventListener('mouseup', mouseUpHandler);
+          resizer.classList.remove('resizing');
+          autoSaveDraft();
+        };
+        resizer.onmousedown = function (e) {
+          x = e.clientX;
+          w = th.offsetWidth;
+          resizer.classList.add('resizing');
+          document.addEventListener('mousemove', mouseMoveHandler);
+          document.addEventListener('mouseup', mouseUpHandler);
+          e.preventDefault();
+        };
+      });
+    }
+
+    function initCounters() {
+      const counters = document.querySelectorAll('.counter');
+      const speed = 60;
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = +counter.getAttribute('data-target') || parseInt(counter.innerText) || 100;
+            let count = 0;
+            const inc = Math.max(1, target / speed);
+            const updateCount = () => {
+              count += inc;
+              if (count < target) {
+                counter.innerText = Math.ceil(count);
+                setTimeout(updateCount, 25);
+              } else {
+                counter.innerText = target;
+              }
+            };
+            updateCount();
+            obs.unobserve(counter);
+          }
+        });
+      }, { threshold: 0.3 });
+      counters.forEach(c => observer.observe(c));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSavedDraft();
+    });
+  </script>
+</body>
+</html>
